@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { List } from "@phosphor-icons/react";
+import { useState } from "react";
 
 const LETTERS = [
   { letter: "G", color: "lightseagreen" },
@@ -21,6 +23,18 @@ const LETTERS = [
 // };
 
 export function Navbar() {
+  const [openNavigation, setOpenNavigation] = useState(false);
+
+  const toggleNavigation = () => {
+    setOpenNavigation(!openNavigation);
+  };
+
+  // const handleClick = () => {
+  //   if (!openNavigation) return;
+
+  //   setOpenNavigation(false);
+  // };
+
   return (
     <Nav>
       <Container>
@@ -40,6 +54,15 @@ export function Navbar() {
         </Main>
 
         <Buttons>
+          <Hamburger onClick={toggleNavigation}>
+            <List size={32} />
+          </Hamburger>
+
+          <Dropdown style={{ display: openNavigation ? "flex" : "none" }}>
+            <NavLink>New Canvas</NavLink>
+            <NavLink>Archive</NavLink>
+            <NavLink>Profile</NavLink>
+          </Dropdown>
           <NavLink>New Canvas</NavLink>
           <NavLink>Archive</NavLink>
           <NavLink>Profile</NavLink>
@@ -88,6 +111,23 @@ const Letter = styled.span<{ color: string }>`
   color: ${({ color }) => color};
 `;
 
+const Hamburger = styled.button`
+  display: none;
+  color: white;
+  background-color: transparent;
+  border: none;
+  @media (max-width: 1175px) {
+    display: flex;
+  }
+`;
+
+const Dropdown = styled.div`
+  display: flex;
+  height: 200px;
+  width: 100px;
+  background-color: blue;
+`;
+
 const Buttons = styled.div`
   display: flex;
   gap: 20px;
@@ -107,5 +147,8 @@ const NavLink = styled.button`
 
   &:hover {
     border: 2px solid plum;
+  }
+  @media (max-width: 1175px) {
+    display: none;
   }
 `;
