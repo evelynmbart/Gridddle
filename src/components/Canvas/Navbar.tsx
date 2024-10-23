@@ -11,6 +11,15 @@ const LETTERS = [
   { letter: "e", color: "rgb(63, 174, 63)" },
 ];
 
+// export const randomColor = () => {
+//   let letters = "0123456789ABCDEF";
+//   let color = "#";
+//   for (let i = 0; i < 6; i++) {
+//     color += letters[Math.floor(Math.random() * 16)];
+//   }
+//   return color;
+// };
+
 export function Navbar() {
   return (
     <Nav>
@@ -41,8 +50,9 @@ export function Navbar() {
 }
 
 const Nav = styled.nav`
-  background-color: black;
-  margin-top: 5%;
+  background-color: #222831;
+  border-radius: 10px 10px 0 0;
+  margin-top: 2%;
   width: 70vw;
   box-shadow: 10px 10px 20px black;
 `;
@@ -58,6 +68,24 @@ const Main = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  margin-left: 1.7%;
+`;
+
+const Logo = styled.img`
+  object-fit: fill;
+  height: 50px;
+  width: 50px;
+  color: white;
+  padding: 5px 0;
+`;
+
+const Title = styled.p`
+  font-size: 1.5rem;
+  color: white;
+`;
+
+const Letter = styled.span<{ color: string }>`
+  color: ${({ color }) => color};
 `;
 
 const Buttons = styled.div`
@@ -67,32 +95,17 @@ const Buttons = styled.div`
 `;
 
 const NavLink = styled.button`
-  background-color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
   padding: 5px 10px;
   display: flex;
   font-family: "Press Start 2p", system-ui;
   font-size: 0.8rem;
   letter-spacing: 0.1rem;
-`;
 
-const Logo = styled.img`
-  object-fit: fill;
-  height: 60px;
-  width: 60px;
-  color: white;
-  padding: 5px;
+  &:hover {
+    border: 2px solid plum;
+  }
 `;
-
-const Title = styled.p`
-  font-size: 2rem;
-  color: white;
-`;
-
-const Letter = styled.span<{ color: string }>`
-  color: ${({ color }) => color};
-`;
-
-// margin: 15px 2%;
-//   display: flex;
-//   justify-content: space-between;
-//   padding: 10px;

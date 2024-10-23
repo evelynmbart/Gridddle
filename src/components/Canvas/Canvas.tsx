@@ -26,6 +26,7 @@ const SketchBook = styled.div`
   width: 70vw;
   background-color: #fffdf8;
   box-shadow: 10px 10px 20px black;
+  border-radius: 0 0 10px 10px;
 `;
 
 // const SketchArea = styled.div`
