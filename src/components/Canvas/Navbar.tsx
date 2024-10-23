@@ -147,7 +147,7 @@ const NavLink = styled.button`
   letter-spacing: 0.1rem;
 
   &:hover {
-    border: 2px solid plum;
+    border: 2px solid goldenrod;
   }
   @media (max-width: 1175px) {
     display: none;
