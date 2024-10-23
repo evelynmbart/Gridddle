@@ -15,49 +15,84 @@ export function Navbar() {
   return (
     <Nav>
       <Container>
-        <Logo
-          id="logo"
-          src="./src/images/waffle02-favcon.png"
-          alt="Waffle Logo"
-        />
-        <Title>
-          {LETTERS.map((letter, i) => (
-            <Letter key={`${letter.letter}-${i}`} color={letter.color}>
-              {letter.letter}
-            </Letter>
-          ))}
-        </Title>
+        <Main>
+          <Logo
+            id="logo"
+            src="./src/images/waffle02-favcon.png"
+            alt="Waffle Logo"
+          />
+          <Title>
+            {LETTERS.map((letter, i) => (
+              <Letter key={`${letter.letter}-${i}`} color={letter.color}>
+                {letter.letter}
+              </Letter>
+            ))}
+          </Title>
+        </Main>
+
+        <Buttons>
+          <NavLink>New Canvas</NavLink>
+          <NavLink>Archive</NavLink>
+          <NavLink>Profile</NavLink>
+        </Buttons>
       </Container>
     </Nav>
   );
 }
 
 const Nav = styled.nav`
-  margin: 15px 2%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  background-color: black;
+  margin-top: 5%;
+  width: 70vw;
+  box-shadow: 10px 10px 20px black;
 `;
 
 const Container = styled.div`
   font-family: "Press Start 2p", system-ui;
   display: flex;
-  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Main = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-right: 2%;
+`;
+
+const NavLink = styled.button`
+  background-color: white;
+  padding: 5px 10px;
+  display: flex;
+  font-family: "Press Start 2p", system-ui;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
 `;
 
 const Logo = styled.img`
   object-fit: fill;
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   color: white;
+  padding: 5px;
 `;
 
 const Title = styled.p`
-  font-size: 2.5rem;
-  margin-top: 20px;
+  font-size: 2rem;
   color: white;
 `;
 
 const Letter = styled.span<{ color: string }>`
   color: ${({ color }) => color};
 `;
+
+// margin: 15px 2%;
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 10px;
