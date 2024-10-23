@@ -7,8 +7,8 @@ export function Canvas() {
     <Container>
       <Navbar />
       <SketchBook>
-        {/* <SketchArea></SketchArea>
-        <SideBar /> */}
+        <SketchArea />
+        <SideBar />
       </SketchBook>
     </Container>
   );
@@ -29,12 +29,12 @@ const SketchBook = styled.div`
   border-radius: 0 0 10px 10px;
 `;
 
-// const SketchArea = styled.div`
-//   background-color: white;
-//   height: 100%;
-//   width: 70%;
-//   border-radius: 10px;
-// `;
+const SketchArea = styled.div`
+  background-color: #fffdf8;
+  height: 100%;
+  width: 80%;
+  border-radius: 10px;
+`;
 //  display: flex;
 // height: 80vh;
 // width: 70vw;
