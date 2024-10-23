@@ -26,13 +26,13 @@ const SketchBook = styled.div`
   width: 70vw;
   background-color: #fffdf8;
   box-shadow: 10px 10px 20px black;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
 `;
 
 const SketchArea = styled.div`
   background-color: #fffdf8;
   height: 100%;
-  width: 80%;
+  width: 90%;
   border-radius: 10px;
 `;
 //  display: flex;

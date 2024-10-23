@@ -24,10 +24,10 @@ export function SideBar() {
         </Palette>
         <ToolBar>
           <Tool>
-            <PaintBrush weight="thin" size={50} />
+            <img src="./src/images/paintbrush.png" />
           </Tool>
           <Tool>
-            <Eraser weight="thin" size={50} />
+            <img src="./src/images/eraser01.png" />
           </Tool>
         </ToolBar>
         <ButtonContainer>
@@ -42,7 +42,8 @@ export function SideBar() {
 const Container = styled.div`
   display: flex;
   justify-content: end;
-  width: 20%;
+  width: 15%;
+  background-color: lightgrey;
 `;
 
 const Content = styled.div`
@@ -54,7 +55,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 5px 0;
   min-height: 602px;
   min-width: 115px;
   @media {
@@ -86,12 +87,15 @@ const Color = styled.button<{ color: string }>`
     height: 40px;
     width: 40px;
   }
+  &:hover {
+    border: 4px solid goldenrod;
+  }
 `;
 
 const ToolBar = styled.div`
   display: flex;
-  justify-content: center;
-  width: 5vw;
+  align-items: center;
+  flex-direction: column;
   gap: 30px;
   @media (max-width: 993px) {
     display: flex;
@@ -101,12 +105,11 @@ const ToolBar = styled.div`
 `;
 
 const Tool = styled.div`
-  height: 60px;
-  width: 60px;
+  object-fit: contain;
+
   cursor: pointer;
 
   &:hover {
-    color: goldenrod;
   }
 `;
 
@@ -121,8 +124,9 @@ const Button = styled.button`
   padding: 10px;
   font-size: 1rem;
   font-family: "Press Start 2P", system-ui;
-  background-color: transparent;
-  border: 2px solid black;
+  background-color: black;
+  color: white;
+  border: 2px solid lightgrey;
   border-radius: 10px;
   padding: 5px 10px;
 
