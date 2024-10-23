@@ -15,7 +15,11 @@ export function Navbar() {
   return (
     <Nav>
       <Container>
-        <Logo id="logo" src="./public/waffle02-favcon copy.png" />
+        <Logo
+          id="logo"
+          src="./src/images/waffle02-favcon.png"
+          alt="Waffle Logo"
+        />
         <Title>
           {LETTERS.map((letter, i) => (
             <Letter key={`${letter.letter}-${i}`} color={letter.color}>
@@ -45,6 +49,7 @@ const Logo = styled.img`
   object-fit: fill;
   height: 80px;
   width: 80px;
+  color: white;
 `;
 
 const Title = styled.p`
