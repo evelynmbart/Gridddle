@@ -1,0 +1,25 @@
+.tool-bar {
+  margin-top: 30px;
+  display: flex;
+  width: 14vw;
+  gap: 20px;
+}
+
+.tool {
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.btns button {
+  padding: 10px;
+  font-size: 1rem;
+  font-family: "Press Start 2P", system-ui;
+}

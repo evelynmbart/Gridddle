@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: rgb(61, 68, 75);
+}
+
+button {
+  cursor: pointer;
+}
