@@ -1,7 +1,7 @@
 import { Eraser, PaintBrush } from "@phosphor-icons/react";
 import styled from "styled-components";
 
-const COLORS = ["red", "yellow", "blue", "white", "black", "grey"];
+const COLORS = ["red", "yellow", "blue", "white", "black", "palevioletred"];
 
 export function SideBar() {
   return (
