@@ -43,15 +43,17 @@ const Container = styled.div`
   justify-content: end;
   margin: 0;
   background-color: lightgrey;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 0;
   max-height: 1000px;
+  border: 2px solid black;
+  border-top: none;
+  border-bottom: none;
 `;
 
 const Content = styled.div`
   height: 100%;
   width: 100%;
-  border: 2px solid black;
-  border-top: none;
+
   display: flex;
   flex-direction: column;
   align-items: center;

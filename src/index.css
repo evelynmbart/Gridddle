@@ -4,7 +4,8 @@
 }
 
 html {
-  background-color: silver;
+  background-image: url("./images/bg-waffle03.png");
+  background-size: cover;
 }
 
 button {
