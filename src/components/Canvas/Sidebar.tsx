@@ -1,4 +1,3 @@
-import { Eraser, PaintBrush } from "@phosphor-icons/react";
 import styled from "styled-components";
 
 const COLORS = [
@@ -42,8 +41,10 @@ export function SideBar() {
 const Container = styled.div`
   display: flex;
   justify-content: end;
-  width: 15%;
+  margin: 0;
   background-color: lightgrey;
+  border-radius: 0 0 5px 5px;
+  max-height: 1000px;
 `;
 
 const Content = styled.div`
@@ -55,12 +56,9 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border-radius: 0 0 5px 0;
-  min-height: 602px;
-  min-width: 115px;
-  @media {
-    min-height: 702px;
-  }
+  border-radius: 0 0 0 0 5px;
+  padding: 0 10px;
+  min-width: 75px;
 `;
 
 const Palette = styled.div`
@@ -70,7 +68,7 @@ const Palette = styled.div`
   justify-content: center;
   gap: 10px;
 
-  @media (max-width: 993px) {
+  @media (max-width: 1440px) {
     display: flex;
     flex-direction: column;
   }
@@ -83,12 +81,13 @@ const Color = styled.button<{ color: string }>`
   height: 60px;
   width: 60px;
 
-  @media (max-width: 993px) {
-    height: 40px;
-    width: 40px;
-  }
   &:hover {
     border: 4px solid goldenrod;
+  }
+
+  @media (max-width: 1440px) {
+    height: 30px;
+    width: 30px;
   }
 `;
 
@@ -97,19 +96,22 @@ const ToolBar = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  @media (max-width: 993px) {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
 `;
 
 const Tool = styled.div`
   object-fit: contain;
-
   cursor: pointer;
 
-  &:hover {
+  img {
+    height: 60px;
+    width: 60px;
+  }
+
+  @media (max-width: 1440px) {
+    img {
+      height: 50px;
+      width: 50px;
+    }
   }
 `;
 
@@ -122,7 +124,7 @@ const ButtonContainer = styled.div`
 
 const Button = styled.button`
   padding: 10px;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-family: "Press Start 2P", system-ui;
   background-color: black;
   color: white;
@@ -134,7 +136,7 @@ const Button = styled.button`
     border: 2px solid goldenrod;
   }
 
-  @media (max-width: 993px) {
-    font-size: 0.75rem;
+  @media (max-width: 1440px) {
+    font-size: 0.5rem;
   }
 `;

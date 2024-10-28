@@ -91,21 +91,32 @@ const Container = styled.div`
 const Main = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   margin-left: 1.7%;
 `;
 
 const Logo = styled.img`
+  display: flex;
   object-fit: fill;
   height: 50px;
   width: 50px;
   color: white;
   padding: 5px 0;
+  @media (max-width: 1100px) {
+    height: 30px;
+    width: 30px;
+  }
+  @media (max-width: 310px) {
+    display: none;
+  }
 `;
 
 const Title = styled.p`
   font-size: 1.5rem;
   color: white;
+  @media (max-width: 1100px) {
+    font-size: 1rem;
+  }
 `;
 
 const Letter = styled.span<{ color: string }>`
@@ -117,7 +128,7 @@ const Hamburger = styled.button`
   color: white;
   background-color: transparent;
   border: none;
-  @media (max-width: 1175px) {
+  @media (max-width: 1100px) {
     display: flex;
   }
 `;
@@ -149,7 +160,7 @@ const NavLink = styled.button`
   &:hover {
     border: 2px solid goldenrod;
   }
-  @media (max-width: 1175px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;
