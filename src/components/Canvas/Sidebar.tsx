@@ -42,12 +42,9 @@ const Container = styled.div`
   display: flex;
   justify-content: end;
   margin: 0;
-  background-color: lightgrey;
-  border-radius: 0 0 5px 0;
+  background-color: #222831;
   max-height: 1000px;
-  border: 2px solid black;
-  border-top: none;
-  border-bottom: none;
+  border-left: 4px solid black;
 `;
 
 const Content = styled.div`
@@ -58,7 +55,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border-radius: 0 0 0 0 5px;
+  border-radius: 0 0 0 10px 10px;
   padding: 0 10px;
   min-width: 75px;
 `;

@@ -74,10 +74,11 @@ export function Navbar() {
 
 const Nav = styled.nav`
   background-color: #222831;
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px 10px 0 0;
   margin-top: 2%;
   width: 70vw;
-  box-shadow: 10px 10px 20px black;
+  border: 3px solid black;
+  border-bottom: none;
 `;
 
 const Container = styled.div`
