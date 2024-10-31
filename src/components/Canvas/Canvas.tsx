@@ -64,6 +64,10 @@ const Grid = styled.div`
   height: 100%;
   aspect-ratio: 1 / 1;
   user-select: none;
+
+  &:hover {
+    cursor: crosshair;
+  }
 `;
 
 const Square = styled.div`
