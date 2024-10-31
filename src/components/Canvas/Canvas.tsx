@@ -15,7 +15,30 @@ export function Canvas({ color }: Props) {
   const handleDraw = (index: number) => {
     setGridColors((prev) => {
       const newGrid = [...prev];
-      newGrid[index] = color;
+
+      // Calculate row and column from index
+      const row = Math.floor(index / GRID_SIZE);
+      const col = index % GRID_SIZE;
+
+      // Fill 3x3 grid around clicked point
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          const newRow = row + i;
+          const newCol = col + j;
+
+          // Check if within grid bounds
+          if (
+            newRow >= 0 &&
+            newRow < GRID_SIZE &&
+            newCol >= 0 &&
+            newCol < GRID_SIZE
+          ) {
+            const newIndex = newRow * GRID_SIZE + newCol;
+            newGrid[newIndex] = color;
+          }
+        }
+      }
+
       return newGrid;
     });
   };
