@@ -60,6 +60,26 @@ export function Canvas() {
           color={c}
           onMouseOver={(e) => e.buttons === 1 && handleDraw(index)}
           onMouseDown={() => handleDraw(index)}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            handleDraw(index);
+          }}
+          onTouchMove={(e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const element = document.elementFromPoint(
+              touch.clientX,
+              touch.clientY
+            );
+            const squareElements = document.querySelectorAll("[data-index]");
+            const touchedIndex = Array.from(squareElements).indexOf(
+              element as Element
+            );
+            if (touchedIndex !== -1) {
+              handleDraw(touchedIndex);
+            }
+          }}
+          data-index={index}
         />
       ))}
     </Grid>
@@ -73,6 +93,7 @@ const Grid = styled.div`
   height: 100%;
   aspect-ratio: 1 / 1;
   user-select: none;
+  touch-action: none;
 
   &:hover {
     cursor: crosshair;
@@ -82,4 +103,5 @@ const Grid = styled.div`
 const Square = styled.div`
   background-color: ${({ color }) => color};
   border: 2px dashed rgb(0, 0, 0, 0.1);
+  touch-action: none;
 `;
