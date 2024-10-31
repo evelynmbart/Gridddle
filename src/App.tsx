@@ -1,21 +1,18 @@
 import styled from "styled-components";
 import { Navbar } from "./components/Navbar";
 import { Tools } from "./components/Tools";
-import { useState } from "react";
 import { Canvas } from "./components/Canvas/Canvas";
-import { COLORS } from "./constants/colors";
 
 function App() {
-  const [color, setColor] = useState(COLORS[0]);
   return (
     <Box>
       <Content>
         <Navbar />
         <SketchBook>
           <SketchArea>
-            <Canvas color={color} />
+            <Canvas />
           </SketchArea>
-          <Tools color={color} setColor={setColor} />
+          <Tools />
         </SketchBook>
       </Content>
     </Box>

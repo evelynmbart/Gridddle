@@ -1,14 +1,9 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/colors";
+import { useCanvasStore, Tool } from "../stores/canvas";
 
-interface Props {
-  color: string;
-  setColor: (color: string) => void;
-}
-
-export function Tools({ color, setColor }: Props) {
-  const [isEraser, setIsEraser] = useState(false);
+export function Tools() {
+  const { color, setColor, tool, setTool } = useCanvasStore();
 
   return (
     <Container>
@@ -24,15 +19,24 @@ export function Tools({ color, setColor }: Props) {
           ))}
         </Palette>
         <ToolBar>
-          <Tool
-            onClick={() => {
-              setIsEraser(!isEraser);
-              setColor("white");
-            }}
-            selected={isEraser}
+          <ToolContainer
+            onClick={() => setTool(Tool.PEN)}
+            selected={tool === Tool.PEN}
+          >
+            <img src="./src/images/paintbrush.png" />
+          </ToolContainer>
+          <ToolContainer
+            onClick={() => setTool(Tool.BRUSH)}
+            selected={tool === Tool.BRUSH}
+          >
+            <img src="./src/images/paintbrush.png" />
+          </ToolContainer>
+          <ToolContainer
+            onClick={() => setTool(Tool.ERASER)}
+            selected={tool === Tool.ERASER}
           >
             <img src="./src/images/eraser01.png" />
-          </Tool>
+          </ToolContainer>
         </ToolBar>
         <ButtonContainer>
           <Button>Save</Button>
@@ -108,7 +112,7 @@ const ToolBar = styled.div`
   gap: 30px;
 `;
 
-const Tool = styled.div<{ selected: boolean }>`
+const ToolContainer = styled.div<{ selected: boolean }>`
   object-fit: contain;
   cursor: pointer;
 
