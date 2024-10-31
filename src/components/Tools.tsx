@@ -1,31 +1,36 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { COLORS } from "../constants/colors";
 
-const COLORS = [
-  "red",
-  "yellow",
-  "blue",
-  "green",
-  "purple",
-  "orange",
-  "white",
-  "black",
-  "palevioletred",
-];
+interface Props {
+  color: string;
+  setColor: (color: string) => void;
+}
 
-export function SideBar() {
+export function Tools({ color, setColor }: Props) {
+  const [isEraser, setIsEraser] = useState(false);
+
   return (
     <Container>
       <Content>
         <Palette>
-          {COLORS.map((color) => (
-            <Color key={color} color={color} />
+          {COLORS.map((c) => (
+            <Color
+              key={c}
+              color={c}
+              onClick={() => setColor(c)}
+              selected={color === c}
+            />
           ))}
         </Palette>
         <ToolBar>
-          <Tool>
-            <img src="./src/images/paintbrush.png" />
-          </Tool>
-          <Tool>
+          <Tool
+            onClick={() => {
+              setIsEraser(!isEraser);
+              setColor("white");
+            }}
+            selected={isEraser}
+          >
             <img src="./src/images/eraser01.png" />
           </Tool>
         </ToolBar>
@@ -73,7 +78,7 @@ const Palette = styled.div`
   }
 `;
 
-const Color = styled.button<{ color: string }>`
+const Color = styled.button<{ color: string; selected: boolean }>`
   background-color: ${({ color }) => color};
   border: 1px solid black;
   border-radius: 100%;
@@ -83,6 +88,12 @@ const Color = styled.button<{ color: string }>`
   &:hover {
     border: 4px solid goldenrod;
   }
+
+  ${({ selected }) =>
+    selected &&
+    `
+      border: 4px solid goldenrod;
+    `}
 
   @media (max-width: 1440px) {
     height: 30px;
@@ -97,7 +108,7 @@ const ToolBar = styled.div`
   gap: 30px;
 `;
 
-const Tool = styled.div`
+const Tool = styled.div<{ selected: boolean }>`
   object-fit: contain;
   cursor: pointer;
 
@@ -112,6 +123,12 @@ const Tool = styled.div`
       width: 50px;
     }
   }
+
+  ${({ selected }) =>
+    selected &&
+    `
+      border: 4px solid goldenrod;
+    `}
 `;
 
 const ButtonContainer = styled.div`

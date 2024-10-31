@@ -1,74 +1,49 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { Navbar } from "../Canvas/Navbar";
-import { SideBar } from "./Sidebar";
 
-export function Canvas() {
+const GRID_SIZE = 16;
+
+interface Props {
+  color: string;
+}
+
+export function Canvas({ color }: Props) {
+  const [gridColors, setGridColors] = useState<string[]>(
+    Array.from({ length: GRID_SIZE * GRID_SIZE }).fill("white") as string[]
+  );
+
+  const handleDraw = (index: number) => {
+    setGridColors((prev) => {
+      const newGrid = [...prev];
+      newGrid[index] = color;
+      return newGrid;
+    });
+  };
+
   return (
-    <div
-      style={{
-        backgroundColor: "#222831",
-        padding: "30px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginRight: "12%",
-        marginLeft: "12%",
-        marginTop: "2%",
-        borderRadius: "10px",
-      }}
-    >
-      <Content>
-        <Navbar />
-        <SketchBook>
-          <SketchArea />
-          <SideBar />
-        </SketchBook>
-      </Content>
-    </div>
+    <Grid>
+      {gridColors.map((c, index) => (
+        <Square
+          key={index}
+          color={c}
+          onMouseOver={(e) => e.buttons === 1 && handleDraw(index)}
+          onMouseDown={() => handleDraw(index)}
+        />
+      ))}
+    </Grid>
   );
 }
 
-// const Box = styled.div`
-//   background-color:#222831,
-//   padding: 30px,
-//   display: flex,
-//   justify-content: center,
-//   align-items: center,
-//   margin: 0 12%,
-//   margin-top: 2%,
-//   border-radius: 10px,
-//   `;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  max-height: 1000px;
-`;
-
-const SketchBook = styled.div`
-  display: flex;
-  height: 80vh;
-  width: 70vw;
-  background-color: #fffdf8;
-  border-radius: 0 0 5px 5px;
-  min-height: 615px;
-  border: 4px solid #222831;
-  margin-bottom: 2%;
-  border-radius: 0 0 10px 10px;
-  border: 3px solid black;
-`;
-
-const SketchArea = styled.div`
-  background-color: #fffdf8;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(${GRID_SIZE}, 1fr);
+  grid-template-rows: repeat(${GRID_SIZE}, 1fr);
   height: 100%;
-  width: 100%;
-  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  user-select: none;
 `;
-//  display: flex;
-// height: 80vh;
-// width: 70vw;
-// background-color: gray;
-// border-radius: 20px;
-// padding: 20px;
+
+const Square = styled.div`
+  background-color: ${({ color }) => color};
+  border: 2px dashed rgb(0, 0, 0, 0.1);
+`;
