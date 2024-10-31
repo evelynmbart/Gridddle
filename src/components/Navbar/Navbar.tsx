@@ -15,7 +15,7 @@ export function Navbar() {
   return (
     <Nav>
       <Container>
-        <Logo id="logo" src="./public/waffle02-favcon copy.png" />
+        <Logo id="logo" src="./waffle02-favcon copy.png" />
         <Title>
           {LETTERS.map((letter, i) => (
             <Letter key={`${letter.letter}-${i}`} color={letter.color}>
