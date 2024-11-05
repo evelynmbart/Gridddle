@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { List } from "@phosphor-icons/react";
 import { useState } from "react";
+import Image from "next/image";
 
 const LETTERS = [
   { letter: "G", color: "lightseagreen" },
@@ -10,7 +11,7 @@ const LETTERS = [
   { letter: "d", color: "rgb(64, 141, 208)" },
   { letter: "d", color: "rgb(156, 31, 156)" },
   { letter: "l", color: "rgb(241, 86, 86)" },
-  { letter: "e", color: "rgb(63, 174, 63)" },
+  { letter: "e", color: "rgb(63, 174, 63)" }
 ];
 
 // export const randomColor = () => {
@@ -41,8 +42,10 @@ export function Navbar() {
         <Main>
           <Logo
             id="logo"
-            src="./src/images/waffle02-favcon.png"
+            src="/images/waffle02-favcon.png"
             alt="Waffle Logo"
+            width={50}
+            height={50}
           />
           <Title>
             {LETTERS.map((letter, i) => (
@@ -96,7 +99,7 @@ const Main = styled.div`
   margin-left: 1.7%;
 `;
 
-const Logo = styled.img`
+const Logo = styled(Image)`
   display: flex;
   object-fit: fill;
   height: 50px;

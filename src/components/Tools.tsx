@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../constants/colors";
 import { useCanvasStore, Tool } from "../stores/canvas";
+import Image from "next/image";
 
 export function Tools() {
   const { color, setColor, tool, setTool } = useCanvasStore();
@@ -23,19 +24,34 @@ export function Tools() {
             onClick={() => setTool(Tool.PEN)}
             selected={tool === Tool.PEN}
           >
-            <img src="./src/images/paintbrush.png" />
+            <Image
+              src="/images/paintbrush.png"
+              alt="paintbrush"
+              width={60}
+              height={60}
+            />
           </ToolContainer>
           <ToolContainer
             onClick={() => setTool(Tool.BRUSH)}
             selected={tool === Tool.BRUSH}
           >
-            <img src="./src/images/paintbrush.png" />
+            <Image
+              src="/images/paintbrush.png"
+              alt="paintbrush"
+              width={60}
+              height={60}
+            />
           </ToolContainer>
           <ToolContainer
             onClick={() => setTool(Tool.ERASER)}
             selected={tool === Tool.ERASER}
           >
-            <img src="./src/images/eraser01.png" />
+            <Image
+              src="/images/eraser01.png"
+              alt="eraser"
+              width={60}
+              height={60}
+            />
           </ToolContainer>
         </ToolBar>
         <ButtonContainer>
@@ -70,16 +86,8 @@ const Content = styled.div`
 `;
 
 const Palette = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 60px);
-  grid-template-rows: repeat(5, 60px);
-  justify-content: center;
-  gap: 10px;
-
-  @media (max-width: 1440px) {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 
 const Color = styled.button<{ color: string; selected: boolean }>`

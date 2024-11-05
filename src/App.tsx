@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Navbar } from "./components/Navbar";
 import { Tools } from "./components/Tools";
-import { Canvas } from "./components/Canvas/Canvas";
+import { Canvas } from "./components/Canvas";
 
 function App() {
   return (

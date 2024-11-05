@@ -1,7 +1,9 @@
+import { Prompt } from "@/components/Prompt";
 import { SignIn } from "@/components/SignIn";
 import { SignOut } from "@/components/SignOut";
 import { useUser } from "@supabase/auth-helpers-react";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   const user = useUser();
@@ -22,6 +24,8 @@ export default function Home() {
       ) : (
         <SignIn />
       )}
+      <Prompt />
+      <Link href="/canvas">Submit a drawing to this prompt</Link>
     </>
   );
 }
