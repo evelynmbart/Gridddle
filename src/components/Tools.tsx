@@ -3,7 +3,12 @@ import { COLORS } from "../constants/colors";
 import { useCanvasStore, Tool } from "../stores/canvas";
 import Image from "next/image";
 
-export function Tools() {
+interface Props {
+  onSave: () => void;
+  onClear: () => void;
+}
+
+export function Tools({ onSave, onClear }: Props) {
   const { color, setColor, tool, setTool } = useCanvasStore();
 
   return (
@@ -55,8 +60,8 @@ export function Tools() {
           </ToolContainer>
         </ToolBar>
         <ButtonContainer>
-          <Button>Save</Button>
-          <Button>Submit</Button>
+          <Button onClick={onClear}>Clear</Button>
+          <Button onClick={onSave}>Save</Button>
         </ButtonContainer>
       </Content>
     </Container>

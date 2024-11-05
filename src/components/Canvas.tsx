@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+"use client";
+
+import { forwardRef, MutableRefObject, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Tool, useCanvasStore } from "../stores/canvas";
 import {
@@ -6,11 +8,9 @@ import {
   BrushTool,
   Dotting,
   DottingRef,
-  useBrush,
-  useData,
-  useDotting,
-  useLayers
+  useBrush
 } from "dotting";
+import { deserializeCanvas } from "@/utils/canvas";
 
 const GRID_SIZE = 16;
 
@@ -41,57 +41,76 @@ const BRUSH_PATTERN = [
   ]
 ];
 
-export function Canvas() {
-  const ref = useRef<DottingRef>(null);
-  const brush = useBrush(ref);
-  const data = useData(ref);
-
-  const { color, tool } = useCanvasStore();
-
-  useEffect(() => {
-    brush.changeBrushColor(color ?? "white");
-  }, [color, brush]);
-
-  useEffect(() => {
-    switch (tool) {
-      case Tool.PEN:
-        brush.changeBrushPattern(PEN_PATTERN);
-        brush.changeBrushTool(BrushTool.DOT);
-        break;
-      case Tool.ERASER:
-        brush.changeBrushPattern(PEN_PATTERN);
-        brush.changeBrushTool(BrushTool.ERASER);
-        break;
-      case Tool.BRUSH:
-        brush.changeBrushPattern(BRUSH_PATTERN);
-        brush.changeBrushTool(BrushTool.DOT);
-        break;
-    }
-  }, [tool, brush]);
-
-  return (
-    <Container>
-      <Dotting
-        ref={ref}
-        width="100%"
-        height="100%"
-        backgroundColor="transparent"
-        isPanZoomable={false}
-        isGridFixed={true}
-        gridSquareLength={40}
-        initAutoScale={true}
-        style={{ border: "none" }}
-        initLayers={[{ id: "1", data: EMPTY_GRID }]}
-      />
-    </Container>
-  );
+interface Props {
+  editable: boolean;
+  grid?: string[][];
 }
 
-const Container = styled.div`
+export const Canvas = forwardRef<DottingRef, Props>(
+  ({ editable, grid }, inputRef) => {
+    const localRef = useRef<DottingRef>(null);
+    const ref = inputRef ?? localRef;
+
+    const brush = useBrush(ref as MutableRefObject<DottingRef>);
+
+    const { color, tool } = useCanvasStore();
+
+    useEffect(() => {
+      brush.changeBrushColor(color ?? "white");
+    }, [color, brush]);
+
+    useEffect(() => {
+      switch (tool) {
+        case Tool.PEN:
+          brush.changeBrushPattern(PEN_PATTERN);
+          brush.changeBrushTool(BrushTool.DOT);
+          break;
+        case Tool.ERASER:
+          brush.changeBrushPattern(PEN_PATTERN);
+          brush.changeBrushTool(BrushTool.ERASER);
+          break;
+        case Tool.BRUSH:
+          brush.changeBrushPattern(BRUSH_PATTERN);
+          brush.changeBrushTool(BrushTool.DOT);
+          break;
+      }
+    }, [tool, brush]);
+
+    return (
+      <Container editable={editable}>
+        <Dotting
+          ref={ref}
+          width="100%"
+          height="100%"
+          backgroundColor="transparent"
+          isPanZoomable={false}
+          isGridFixed={true}
+          gridSquareLength={40}
+          initAutoScale={true}
+          style={{ border: "none" }}
+          initLayers={[
+            { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID }
+          ]}
+          isInteractionApplicable={editable}
+          isDrawingEnabled={editable}
+        />
+      </Container>
+    );
+  }
+);
+
+const Container = styled.div<{ editable: boolean }>`
   height: 100%;
   aspect-ratio: 1 / 1;
 
-  &:hover {
-    cursor: crosshair !important;
-  }
+  ${({ editable }: { editable: boolean }) =>
+    editable
+      ? `
+      &:hover {
+        cursor: crosshair !important;
+      }
+    `
+      : `
+      pointer-events: none;
+    `}
 `;

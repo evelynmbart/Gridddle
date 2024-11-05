@@ -1,3 +1,4 @@
+import { Feed } from "@/components/Feed";
 import { Prompt } from "@/components/Prompt";
 import { SignIn } from "@/components/SignIn";
 import { SignOut } from "@/components/SignOut";
@@ -26,6 +27,7 @@ export default function Home() {
       )}
       <Prompt />
       <Link href="/canvas">Submit a drawing to this prompt</Link>
+      <Feed />
     </>
   );
 }
