@@ -10,9 +10,9 @@ function App() {
         <Navbar />
         <SketchBook>
           <SketchArea>
-            <Canvas />
+            <Canvas editable={false} />
           </SketchArea>
-          <Tools />
+          <Tools onSave={() => {}} onClear={() => {}} />
         </SketchBook>
       </Content>
     </Box>
