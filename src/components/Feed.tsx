@@ -5,6 +5,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { Canvas } from "./Canvas";
 import styled from "styled-components";
+import Image from "next/image";
 
 export function Feed() {
   const [grids, setGrids] = useState<Grid[]>([]);
@@ -38,20 +39,67 @@ export function Feed() {
   }, []);
 
   return (
-    <div>
+    <Catalog>
       {grids.map((g) => {
         return (
-          <div key={g.id}>
-            <h3>{g.email}</h3>
+          <Post key={g.id}>
             <CanvasContainer>
               <Canvas editable={false} grid={g.grid} />
             </CanvasContainer>
-          </div>
+            <PostInfo>
+              <Top>
+                <h4>{g.email}</h4>
+                <Image
+                  src="/images/heart.png"
+                  width={30}
+                  height={30}
+                  alt="heart"
+                />
+              </Top>
+              <Bottom>
+                <p>9 hours ago</p>
+                <p>Likes: 203</p>
+              </Bottom>
+            </PostInfo>
+          </Post>
         );
       })}
-    </div>
+    </Catalog>
   );
 }
+
+const Catalog = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+`;
+
+const Post = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid black;
+  height: 355px;
+  background-color: black;
+  color: white;
+`;
+
+const PostInfo = styled.div`
+  width: 90%;
+`;
+
+const Top = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const CanvasContainer = styled.div`
   width: 300px;

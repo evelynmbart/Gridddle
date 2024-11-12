@@ -25,7 +25,7 @@ export function Prompt() {
 
   return (
     <div>
-      <h1>Today's prompt: {prompt}</h1>
+      <h1 style={{ color: "white" }}>Today's prompt: {prompt}</h1>
     </div>
   );
 }

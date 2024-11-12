@@ -48,12 +48,13 @@ export function Navbar() {
 const Container = styled.div`
   width: 100%;
   height: 30px;
-  background-color: gainsboro;
+  background-color: black;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid white;
   margin-bottom: 10px;
+  color: white;
 `;
 
 const Left = styled.div`
@@ -71,15 +72,14 @@ const Right = styled.div`
 
 const Tab = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
-  color: black;
-  background: ${(props) => (props.selected ? "lightsteelblue" : "lightgrey")};
+  color: white;
+  background: ${(props) => (props.selected ? "#10344d" : "#184c6f")};
   height: 80%;
   padding: 2px 6px;
   border-radius: 5px 5px 0 0;
-  border: 2px solid black;
-  border-bottom: 2px solid
-    ${(props) => (props.selected ? "lightsteelblue" : "black")};
-  margin-bottom: -2px;
+  border: 1px solid #10344d;
+  border-bottom: 1px solid ${(props) => (props.selected ? "none" : "white")};
+  margin-bottom: -1px;
   font-size: 20px;
 
   &:hover {

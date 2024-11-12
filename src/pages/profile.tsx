@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { Navbar } from "@/components/NavbarNew";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { useData } from "dotting";
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
+  const [userData, setUserData] = useState({
+    username: "Evelyn",
+    bio: "hello",
+  });
 
-  console.log(isEditing);
   return (
     <>
       <Navbar />
@@ -25,16 +29,40 @@ export default function Profile() {
             />
             <UserInfo>
               <h1>
-                Username:
-                {/* <input type="text" required style={{ height: "30px" }} /> */}
+                {userData.username}
+                {isEditing && (
+                  <input
+                    type="text"
+                    required
+                    value={userData.username}
+                    style={{ height: "30px", backgroundColor: "gainsboro" }}
+                  />
+                )}
               </h1>
-              <p>Bio:</p>
+              <p>
+                Bio: {userData.bio}
+                {isEditing && (
+                  <textarea
+                    value={userData.bio}
+                    style={{
+                      backgroundColor: "gainsboro",
+                      height: "50px",
+                      maxWidth: "300px",
+                      maxHeight: "100px",
+                    }}
+                  />
+                )}
+              </p>
             </UserInfo>
           </Avatar>
 
           <Edit onClick={() => setIsEditing(!isEditing)}>Edit profile</Edit>
         </Top>
-        <Bottom></Bottom>
+        <Bottom>
+          <Tab></Tab>
+          <Previous></Previous>
+          <Friends></Friends>
+        </Bottom>
       </Container>
     </>
   );
@@ -52,8 +80,6 @@ const Top = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
-const Bottom = styled.div``;
 
 const Avatar = styled.div`
   display: flex;
@@ -76,6 +102,7 @@ const UserInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 3rem;
 
     input {
       font-family: "Tiny5";
@@ -91,7 +118,7 @@ const UserInfo = styled.div`
   }
 
   p {
-    font-size: 20px;
+    font-size: 1.7rem;
     display: flex;
     align-items: center;
   }
@@ -111,3 +138,11 @@ const Edit = styled.button`
     border: 2px solid goldenrod;
   }
 `;
+
+const Bottom = styled.div``;
+
+const Tab = styled.div``;
+
+const Previous = styled.div``;
+
+const Friends = styled.div``;
