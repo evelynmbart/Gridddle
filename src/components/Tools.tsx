@@ -36,10 +36,10 @@ export function Tools({ onSave, onClear }: Props) {
           selected={tool === Tool.ERASER}
         >
           <Image
-            src="/images/eraser.png"
+            src="/images/eraser02.png"
             alt="eraser"
-            width={100}
-            height={100}
+            width={50}
+            height={50}
           />
         </ToolContainer>
       </Palette>
@@ -67,35 +67,36 @@ const Palette = styled.div`
 
 const Color = styled.button<{ color: string; selected: boolean }>`
   background-color: ${({ color }) => color};
-  border: 4px solid black;
+  border: 2px solid black;
   height: 60px;
   width: 60px;
 
   &:hover {
-    border: 4px solid goldenrod;
+    border: 2px solid goldenrod;
   }
 
   ${({ selected }) =>
     selected &&
     `
-      border: 4px solid goldenrod;
+      border: 2px solid goldenrod;
     `}
 `;
 
 const ToolContainer = styled.div<{ selected: boolean }>`
   object-fit: contain;
   cursor: pointer;
-
+  display: flex;
+  justify-content: center;
   height: 60px;
   width: 60px;
   box-sizing: border-box;
 
-  border: 4px solid black;
+  border: 2px solid black;
 
   ${({ selected }) =>
     selected &&
     `
-      border: 4px solid goldenrod;
+      border: 2px solid goldenrod;
     `}
 `;
 
@@ -110,12 +111,12 @@ const Button = styled.button`
   padding: 10px;
   background-color: gainsboro;
   color: black;
-  border: 4px solid black;
+  border: 2px solid black;
   padding: 5px 10px;
   font-family: "Tiny5";
   font-size: 32px;
 
   &:hover {
-    border: 4px solid goldenrod;
+    border: 2px solid goldenrod;
   }
 `;
