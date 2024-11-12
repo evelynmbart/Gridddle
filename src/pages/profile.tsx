@@ -22,10 +22,6 @@ export default function Profile() {
               width={200}
               height={200}
               alt="profile image"
-              style={{
-                border: "2px solid black",
-                backgroundColor: "gainsboro",
-              }}
             />
             <UserInfo>
               <h1>
