@@ -80,14 +80,16 @@ export const Canvas = forwardRef<DottingRef, Props>(
       <Container editable={editable}>
         <Dotting
           ref={ref}
-          width="100%"
           height="100%"
+          width="100%"
           backgroundColor="transparent"
           isPanZoomable={false}
           isGridFixed={true}
-          gridSquareLength={40}
+          gridSquareLength={25}
           initAutoScale={true}
-          style={{ border: "none" }}
+          style={{
+            border: "none",
+          }}
           initLayers={[
             { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID },
           ]}
@@ -100,8 +102,7 @@ export const Canvas = forwardRef<DottingRef, Props>(
 );
 
 const Container = styled.div<{ editable: boolean }>`
-  width: 100%;
-
+  width: min(100%, 400px);
   aspect-ratio: 1 / 1;
 
   ${({ editable }: { editable: boolean }) =>

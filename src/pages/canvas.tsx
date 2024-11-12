@@ -2,6 +2,7 @@
 
 import { Canvas } from "@/components/Canvas";
 import { Navbar } from "@/components/NavbarNew";
+import { Prompt } from "@/components/Prompt";
 import { Tools } from "@/components/Tools";
 import { useCanvasStore } from "@/stores/canvas";
 import { serializeCanvas } from "@/utils/canvas";
@@ -65,6 +66,7 @@ export default function CanvasPage() {
     <>
       <Navbar />
       {!user && <div>You must sign in to save your drawings:</div>}
+      <Prompt />
       <Container>
         <Canvas ref={canvasRef} editable={!!user} />
         <Tools onSave={handleSave} onClear={handleClear} />
@@ -73,10 +75,15 @@ export default function CanvasPage() {
   );
 }
 
-const Page = styled.div`
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-`;
+// const Page = styled.div`
+//   height: 100vh;
+//   width: 100vw;
+//   overflow: hidden;
+// `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+`;

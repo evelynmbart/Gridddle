@@ -72,13 +72,13 @@ const Color = styled.button<{ color: string; selected: boolean }>`
   width: 60px;
 
   &:hover {
-    border: 2px solid goldenrod;
+    border: 2px solid black;
   }
 
   ${({ selected }) =>
     selected &&
     `
-      border: 2px solid goldenrod;
+      border: 4px solid black;
     `}
 `;
 
@@ -91,12 +91,10 @@ const ToolContainer = styled.div<{ selected: boolean }>`
   width: 60px;
   box-sizing: border-box;
 
-  border: 2px solid black;
-
   ${({ selected }) =>
     selected &&
     `
-      border: 2px solid goldenrod;
+      border: 4px solid black;
     `}
 `;
 
@@ -108,8 +106,8 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: gainsboro;
-  color: black;
+  background-color: black;
+  color: white;
   border: 2px solid black;
   padding: 5px 10px;
   font-family: "Tiny5";
