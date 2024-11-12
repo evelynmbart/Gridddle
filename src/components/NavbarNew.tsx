@@ -14,7 +14,10 @@ export function Navbar() {
 
   const signIn = async () => {
     await supabase.auth.signInWithOAuth({
-      provider: "github"
+      provider: "github",
+      options: {
+        redirectTo: window.location.origin
+      }
     });
   };
 
