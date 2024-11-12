@@ -8,7 +8,7 @@ html {
 
 body {
   margin: 0;
-  background-color: dodgerblue;
+  background-image: url("/images/bg-waffle03.png");
 
   background-attachment: fixed;
 }
