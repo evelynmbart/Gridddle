@@ -1,9 +1,10 @@
 "use client";
 
 import { Canvas } from "@/components/Canvas";
-import { Prompt } from "@/components/Prompt";
+import { Navbar } from "@/components/NavbarNew";
 import { SignIn } from "@/components/SignIn";
 import { Tools } from "@/components/Tools";
+import { Prompt } from "@/types/database";
 import { serializeCanvas } from "@/utils/canvas";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { DottingRef, useData, useDotting } from "dotting";
@@ -12,7 +13,7 @@ import { MutableRefObject, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export default function CanvasPage() {
-  const [promptID, setPromptID] = useState<string | null>(null);
+  const [prompt, setPrompt] = useState<Prompt | null>(null);
 
   const canvasRef = useRef<DottingRef>(null);
   const canvasData = useData(canvasRef as MutableRefObject<DottingRef>);
@@ -34,7 +35,7 @@ export default function CanvasPage() {
         alert("Error fetching prompt");
         return;
       }
-      setPromptID(data?.[0]?.id ?? null);
+      setPrompt(data?.[0] ?? null);
     })();
   }, []);
 
@@ -47,7 +48,7 @@ export default function CanvasPage() {
     const { error } = await supabase.from("grids").insert({
       email: user.email,
       grid: data,
-      prompt_id: promptID
+      prompt_id: prompt?.id
     });
     if (error) {
       console.error(error);
@@ -63,13 +64,8 @@ export default function CanvasPage() {
 
   return (
     <div>
-      <Prompt />
-      {user && (
-        <div>
-          You must sign in to save your drawings:
-          <SignIn />
-        </div>
-      )}
+      <Navbar />
+      {!user && <div>You must sign in to save your drawings:</div>}
       <SketchBook>
         <SketchArea>
           <Canvas ref={canvasRef} editable={!!user} />

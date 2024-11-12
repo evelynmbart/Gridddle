@@ -2,6 +2,10 @@ import { AppProps } from "next/app";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { useState } from "react";
+import "@/index.css";
+import { Tiny5 } from "next/font/google";
+
+const font = Tiny5({ subsets: ["latin"], weight: "400" });
 
 function MyApp({
   Component,
@@ -17,7 +21,9 @@ function MyApp({
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <main className={font.className}>
+        <Component {...pageProps} />
+      </main>
     </SessionContextProvider>
   );
 }
