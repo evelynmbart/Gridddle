@@ -1,5 +1,6 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 export function Prompt() {
   const [prompt, setPrompt] = useState<string | null>(null);
@@ -24,8 +25,22 @@ export function Prompt() {
   if (!prompt) return null;
 
   return (
-    <div>
-      <h1 style={{ color: "white" }}>Today's prompt: {prompt}</h1>
-    </div>
+    <Container>
+      Today's prompt:
+      <DailyPrompt>{prompt}</DailyPrompt>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 36px;
+`;
+
+const DailyPrompt = styled.h1`
+  color: white;
+  text-transform: uppercase;
+`;

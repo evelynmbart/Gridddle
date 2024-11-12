@@ -70,10 +70,11 @@ export function Feed() {
 
 const Catalog = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 30px;
+  margin: 20px 200px;
 `;
 
 const Post = styled.div`
@@ -88,7 +89,7 @@ const Post = styled.div`
 `;
 
 const PostInfo = styled.div`
-  width: 90%;
+  width: 94%;
 `;
 
 const Top = styled.div`

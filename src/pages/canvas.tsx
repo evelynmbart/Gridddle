@@ -66,9 +66,6 @@ export default function CanvasPage() {
       <Navbar />
       {!user && <div>You must sign in to save your drawings:</div>}
       <Container>
-        <PromptDisplay>
-          Today's prompt: {prompt?.prompt ?? "whatever"}
-        </PromptDisplay>
         <Canvas ref={canvasRef} editable={!!user} />
         <Tools onSave={handleSave} onClear={handleClear} />
       </Container>
@@ -82,12 +79,4 @@ const Page = styled.div`
   overflow: hidden;
 `;
 
-const PromptDisplay = styled.h2`
-  margin-left: 10px;
-`;
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
-`;
+const Container = styled.div``;

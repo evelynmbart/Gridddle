@@ -6,8 +6,11 @@ import { SignOut } from "@/components/SignOut";
 import { useUser } from "@supabase/auth-helpers-react";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
+import styled from "styled-components";
 
 export default function Home() {
+  const [isHovering, setIsHovering] = useState(false);
   const user = useUser();
 
   return (
@@ -20,8 +23,39 @@ export default function Home() {
       </Head>
       <Navbar />
       <Prompt />
-      <Link href="/canvas">Submit a drawing to this prompt</Link>
+      <div
+        style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
+      >
+        <Create>
+          <Link
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            href="/canvas"
+            style={{
+              color: isHovering ? "black" : "white",
+              textDecoration: "none",
+            }}
+          >
+            Create a post of your own here!
+          </Link>
+        </Create>
+      </div>
+
       <Feed />
     </>
   );
 }
+
+const Create = styled.button`
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  font-family: "Tiny5";
+  font-size: 20px;
+  border: none;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: white;
+  }
+`;
