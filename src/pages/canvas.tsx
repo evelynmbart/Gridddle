@@ -62,7 +62,7 @@ export default function CanvasPage() {
   };
 
   return (
-    <>
+    <Page>
       <Navbar />
       {!user && <div>You must sign in to save your drawings:</div>}
       <Container>
@@ -72,9 +72,15 @@ export default function CanvasPage() {
         <Canvas ref={canvasRef} editable={!!user} />
         <Tools onSave={handleSave} onClear={handleClear} />
       </Container>
-    </>
+    </Page>
   );
 }
+
+const Page = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+`;
 
 const PromptDisplay = styled.h2`
   margin-left: 10px;
