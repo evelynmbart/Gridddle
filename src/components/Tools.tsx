@@ -108,7 +108,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 10px;
   background-color: gainsboro;
   color: black;
   border: 2px solid black;

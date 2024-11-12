@@ -30,8 +30,8 @@ export function Navbar() {
   return (
     <Container>
       <Left>
-        {tabs.map((tab) => (
-          <Tab selected={pathname === tab.href} href={tab.href}>
+        {tabs.map((tab, index) => (
+          <Tab selected={pathname === tab.href} href={tab.href} key={index}>
             {tab.label}
           </Tab>
         ))}
