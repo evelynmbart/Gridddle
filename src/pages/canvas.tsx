@@ -47,7 +47,7 @@ export default function CanvasPage() {
     const { error } = await supabase.from("grids").insert({
       email: user.email,
       grid: data,
-      prompt_id: prompt?.id
+      prompt_id: prompt?.id,
     });
     if (error) {
       console.error(error);
@@ -62,7 +62,7 @@ export default function CanvasPage() {
   };
 
   return (
-    <Page>
+    <>
       <Navbar />
       {!user && <div>You must sign in to save your drawings:</div>}
       <Container>
@@ -72,7 +72,7 @@ export default function CanvasPage() {
         <Canvas ref={canvasRef} editable={!!user} />
         <Tools onSave={handleSave} onClear={handleClear} />
       </Container>
-    </Page>
+    </>
   );
 }
 

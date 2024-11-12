@@ -14,7 +14,7 @@ export function Tools({ onSave, onClear }: Props) {
     "hotpink",
     "mediumspringgreen",
     "deepskyblue",
-    "gold"
+    "gold",
   ];
 
   return (
@@ -36,10 +36,10 @@ export function Tools({ onSave, onClear }: Props) {
           selected={tool === Tool.ERASER}
         >
           <Image
-            src="/images/eraser01.png"
+            src="/images/eraser.png"
             alt="eraser"
-            width={60}
-            height={60}
+            width={100}
+            height={100}
           />
         </ToolContainer>
       </Palette>

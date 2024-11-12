@@ -8,7 +8,7 @@ import {
   BrushTool,
   Dotting,
   DottingRef,
-  useBrush
+  useBrush,
 } from "dotting";
 import { deserializeCanvas } from "@/utils/canvas";
 
@@ -18,7 +18,7 @@ const EMPTY_GRID = Array.from({ length: GRID_SIZE }, (_, i) =>
   Array.from({ length: GRID_SIZE }, (_, j) => ({
     rowIndex: i,
     columnIndex: j,
-    color: "white"
+    color: "white",
   }))
 );
 
@@ -27,18 +27,18 @@ const BRUSH_PATTERN = [
   [
     BRUSH_PATTERN_ELEMENT.EMPTY,
     BRUSH_PATTERN_ELEMENT.FILL,
-    BRUSH_PATTERN_ELEMENT.EMPTY
+    BRUSH_PATTERN_ELEMENT.EMPTY,
   ],
   [
     BRUSH_PATTERN_ELEMENT.FILL,
     BRUSH_PATTERN_ELEMENT.FILL,
-    BRUSH_PATTERN_ELEMENT.FILL
+    BRUSH_PATTERN_ELEMENT.FILL,
   ],
   [
     BRUSH_PATTERN_ELEMENT.EMPTY,
     BRUSH_PATTERN_ELEMENT.FILL,
-    BRUSH_PATTERN_ELEMENT.EMPTY
-  ]
+    BRUSH_PATTERN_ELEMENT.EMPTY,
+  ],
 ];
 
 interface Props {
@@ -89,7 +89,7 @@ export const Canvas = forwardRef<DottingRef, Props>(
           initAutoScale={true}
           style={{ border: "none" }}
           initLayers={[
-            { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID }
+            { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID },
           ]}
           isInteractionApplicable={editable}
           isDrawingEnabled={editable}
@@ -101,6 +101,7 @@ export const Canvas = forwardRef<DottingRef, Props>(
 
 const Container = styled.div<{ editable: boolean }>`
   width: 100%;
+
   margin-left: -2px;
   aspect-ratio: 1 / 1;
 
