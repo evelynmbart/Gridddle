@@ -100,7 +100,8 @@ export const Canvas = forwardRef<DottingRef, Props>(
 );
 
 const Container = styled.div<{ editable: boolean }>`
-  height: 100%;
+  width: 100%;
+  margin-left: -2px;
   aspect-ratio: 1 / 1;
 
   ${({ editable }: { editable: boolean }) =>

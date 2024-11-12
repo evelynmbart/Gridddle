@@ -2,9 +2,8 @@
 
 import { Grid, Prompt } from "@/types/database";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { createRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Canvas } from "./Canvas";
-import { DottingRef } from "dotting";
 import styled from "styled-components";
 
 export function Feed() {
@@ -27,7 +26,8 @@ export function Feed() {
       const { data: grids, error: gridsError } = await supabase
         .from("grids")
         .select("*")
-        .eq("prompt_id", prompt.id);
+        .eq("prompt_id", prompt.id)
+        .order("created_at", { ascending: false });
       if (gridsError) {
         console.error(gridsError);
         alert("Error fetching grids");

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { COLORS } from "../constants/colors";
 import { useCanvasStore, Tool } from "../stores/canvas";
 import Image from "next/image";
 
@@ -9,96 +8,66 @@ interface Props {
 }
 
 export function Tools({ onSave, onClear }: Props) {
-  const { color, setColor, tool, setTool } = useCanvasStore();
+  const { color, setColor, tool, setTool, prompt } = useCanvasStore();
+
+  const colors = prompt?.colors ?? [
+    "hotpink",
+    "mediumspringgreen",
+    "deepskyblue",
+    "gold"
+  ];
 
   return (
     <Container>
-      <Content>
-        <Palette>
-          {COLORS.map((c) => (
-            <Color
-              key={c}
-              color={c}
-              onClick={() => setColor(c)}
-              selected={color === c}
-            />
-          ))}
-        </Palette>
-        <ToolBar>
-          <ToolContainer
-            onClick={() => setTool(Tool.PEN)}
-            selected={tool === Tool.PEN}
-          >
-            <Image
-              src="/images/paintbrush.png"
-              alt="paintbrush"
-              width={60}
-              height={60}
-            />
-          </ToolContainer>
-          <ToolContainer
-            onClick={() => setTool(Tool.BRUSH)}
-            selected={tool === Tool.BRUSH}
-          >
-            <Image
-              src="/images/paintbrush.png"
-              alt="paintbrush"
-              width={60}
-              height={60}
-            />
-          </ToolContainer>
-          <ToolContainer
-            onClick={() => setTool(Tool.ERASER)}
-            selected={tool === Tool.ERASER}
-          >
-            <Image
-              src="/images/eraser01.png"
-              alt="eraser"
-              width={60}
-              height={60}
-            />
-          </ToolContainer>
-        </ToolBar>
-        <ButtonContainer>
-          <Button onClick={onClear}>Clear</Button>
-          <Button onClick={onSave}>Save</Button>
-        </ButtonContainer>
-      </Content>
+      <Palette>
+        {colors.map((c) => (
+          <Color
+            key={c}
+            color={c}
+            onClick={() => {
+              setColor(c);
+              setTool(Tool.PEN);
+            }}
+            selected={color === c && tool === Tool.PEN}
+          />
+        ))}
+        <ToolContainer
+          onClick={() => setTool(Tool.ERASER)}
+          selected={tool === Tool.ERASER}
+        >
+          <Image
+            src="/images/eraser01.png"
+            alt="eraser"
+            width={60}
+            height={60}
+          />
+        </ToolContainer>
+      </Palette>
+      <ButtonContainer>
+        <Button onClick={onClear}>Clear</Button>
+        <Button onClick={onSave}>Save</Button>
+      </ButtonContainer>
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
-  justify-content: end;
-  margin: 0;
-  background-color: #222831;
-  max-height: 1000px;
-  border-left: 4px solid black;
-`;
-
-const Content = styled.div`
-  height: 100%;
-  width: 100%;
-
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 0 0 0 10px 10px;
-  padding: 0 10px;
-  min-width: 75px;
+  gap: 30px;
 `;
 
 const Palette = styled.div`
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 `;
 
 const Color = styled.button<{ color: string; selected: boolean }>`
   background-color: ${({ color }) => color};
-  border: 1px solid black;
-  border-radius: 100%;
+  border: 4px solid black;
   height: 60px;
   width: 60px;
 
@@ -111,35 +80,17 @@ const Color = styled.button<{ color: string; selected: boolean }>`
     `
       border: 4px solid goldenrod;
     `}
-
-  @media (max-width: 1440px) {
-    height: 30px;
-    width: 30px;
-  }
-`;
-
-const ToolBar = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 30px;
 `;
 
 const ToolContainer = styled.div<{ selected: boolean }>`
   object-fit: contain;
   cursor: pointer;
 
-  img {
-    height: 60px;
-    width: 60px;
-  }
+  height: 60px;
+  width: 60px;
+  box-sizing: border-box;
 
-  @media (max-width: 1440px) {
-    img {
-      height: 50px;
-      width: 50px;
-    }
-  }
+  border: 4px solid black;
 
   ${({ selected }) =>
     selected &&
@@ -150,26 +101,21 @@ const ToolContainer = styled.div<{ selected: boolean }>`
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 30px;
 `;
 
 const Button = styled.button`
   padding: 10px;
-  font-size: 0.75rem;
-  font-family: "Press Start 2P", system-ui;
-  background-color: black;
-  color: white;
-  border: 2px solid lightgrey;
-  border-radius: 10px;
+  background-color: gainsboro;
+  color: black;
+  border: 4px solid black;
   padding: 5px 10px;
+  font-family: "Tiny5";
+  font-size: 32px;
 
   &:hover {
-    border: 2px solid goldenrod;
-  }
-
-  @media (max-width: 1440px) {
-    font-size: 0.5rem;
+    border: 4px solid goldenrod;
   }
 `;

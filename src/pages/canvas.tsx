@@ -2,18 +2,17 @@
 
 import { Canvas } from "@/components/Canvas";
 import { Navbar } from "@/components/NavbarNew";
-import { SignIn } from "@/components/SignIn";
 import { Tools } from "@/components/Tools";
-import { Prompt } from "@/types/database";
+import { useCanvasStore } from "@/stores/canvas";
 import { serializeCanvas } from "@/utils/canvas";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { DottingRef, useData, useDotting } from "dotting";
 import { useRouter } from "next/router";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 export default function CanvasPage() {
-  const [prompt, setPrompt] = useState<Prompt | null>(null);
+  const { prompt, setPrompt } = useCanvasStore();
 
   const canvasRef = useRef<DottingRef>(null);
   const canvasData = useData(canvasRef as MutableRefObject<DottingRef>);
@@ -63,37 +62,26 @@ export default function CanvasPage() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
       {!user && <div>You must sign in to save your drawings:</div>}
-      <SketchBook>
-        <SketchArea>
-          <Canvas ref={canvasRef} editable={!!user} />
-        </SketchArea>
+      <Container>
+        <PromptDisplay>
+          Today's prompt: {prompt?.prompt ?? "whatever"}
+        </PromptDisplay>
+        <Canvas ref={canvasRef} editable={!!user} />
         <Tools onSave={handleSave} onClear={handleClear} />
-      </SketchBook>
-    </div>
+      </Container>
+    </>
   );
 }
 
-const SketchBook = styled.div`
-  display: flex;
-  height: 80vh;
-  width: 70vw;
-  background-color: #fffdf8;
-  border-radius: 0 0 5px 5px;
-  min-height: 615px;
-  border: 4px solid #222831;
-  margin-bottom: 2%;
-  border-radius: 0 0 10px 10px;
-  border: 3px solid black;
+const PromptDisplay = styled.h2`
+  margin-left: 10px;
 `;
-
-const SketchArea = styled.div`
-  background: #222831;
-  height: 100%;
-  width: 100%;
+const Container = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 `;

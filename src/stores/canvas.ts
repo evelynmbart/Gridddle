@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { COLORS } from "../constants/colors";
+import { Prompt } from "@/types/database";
 
 export enum Tool {
   PEN = "pen",
@@ -8,6 +8,8 @@ export enum Tool {
 }
 
 interface CanvasStore {
+  prompt: Prompt | null;
+  setPrompt: (prompt: Prompt | null) => void;
   tool: Tool;
   setTool: (tool: Tool) => void;
   color: string | null;
@@ -17,9 +19,11 @@ interface CanvasStore {
 }
 
 export const useCanvasStore = create<CanvasStore>(set => ({
+  prompt: null,
+  setPrompt: prompt => set({ prompt }),
   tool: Tool.PEN,
   setTool: tool => set({ tool }),
-  color: COLORS[0],
+  color: "white",
   setColor: color => set({ color }),
   gridColors: [],
   setGridColors: gridColors => set({ gridColors })
