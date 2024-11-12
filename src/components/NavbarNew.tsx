@@ -52,7 +52,6 @@ const Container = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  border-bottom: 1px solid white;
   margin-bottom: 10px;
   color: white;
 `;
@@ -73,13 +72,11 @@ const Right = styled.div`
 const Tab = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
   color: white;
-  background: ${(props) => (props.selected ? "#10344d" : "#184c6f")};
+  background: ${(props) => (props.selected ? "#406e8e" : "##23395b")};
   height: 80%;
   padding: 2px 6px;
   border-radius: 5px 5px 0 0;
-  border: 1px solid #10344d;
-  border-bottom: 1px solid ${(props) => (props.selected ? "none" : "white")};
-  margin-bottom: -1px;
+  border-bottom: -1px solid ${(props) => (props.selected ? "none" : "black")};
   font-size: 20px;
 
   &:hover {
