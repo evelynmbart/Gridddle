@@ -71,6 +71,7 @@ export default function Profile() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  color: white;
 `;
 
 const Top = styled.div`
@@ -125,8 +126,8 @@ const UserInfo = styled.div`
 `;
 
 const Edit = styled.button`
-  background-color: gainsboro;
-  color: black;
+  background-color: black;
+  color: white;
   border: 2px solid black;
   padding: 5px 10px;
   font-family: "Tiny5";
