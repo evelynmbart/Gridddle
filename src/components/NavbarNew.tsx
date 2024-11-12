@@ -16,15 +16,15 @@ export function Navbar() {
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: window.location.origin
-      }
+        redirectTo: window.location.origin,
+      },
     });
   };
 
   const tabs = [
     { label: "Feed", href: "/" },
     { label: "Canvas", href: "/canvas" },
-    ...(user ? [{ label: "Profile", href: "/profile" }] : [])
+    ...(user ? [{ label: "Profile", href: "/profile" }] : []),
   ];
 
   return (
