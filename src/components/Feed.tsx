@@ -1,30 +1,20 @@
 "use client";
 
 import { Grid, FeedGrid, Prompt } from "@/types/database";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { Canvas } from "./Canvas";
 import styled from "styled-components";
 import Image from "next/image";
+import { X } from "@phosphor-icons/react";
 
 export function Feed() {
-  const [prompt, setPrompt] = useState<Prompt | null>(null);
   const [grids, setGrids] = useState<FeedGrid[]>([]);
   const supabase = useSupabaseClient();
+  const user = useUser();
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await supabase
-        .from("prompts")
-        .select("*")
-        .eq("day", new Date().toLocaleDateString("en-CA"));
-      if (error) {
-        console.error(error);
-        alert("Error fetching prompt");
-        return;
-      }
-      const prompt: Prompt | undefined = data?.[0];
-      setPrompt(prompt ?? null);
       const { data: grids, error: gridsError } = await supabase
         .from("grids")
         .select(
@@ -39,7 +29,6 @@ export function Feed() {
         `
         )
         .order("created_at", { ascending: false });
-      console.log(grids);
       if (gridsError) {
         console.error(gridsError);
         alert("Error fetching grids");
@@ -49,12 +38,37 @@ export function Feed() {
     })();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this drawing?")) return;
+    const { error } = await supabase.from("grids").delete().eq("id", id);
+    if (error) {
+      console.error(error);
+      alert("Error deleting drawing");
+      return;
+    }
+    setGrids(grids.filter((g) => g.id !== id));
+  };
+
   return (
     <Catalog>
       {grids.map((g) => {
         return (
           <Post key={g.id}>
-            <p>Responding to: {g.prompts.prompt}</p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "100%"
+              }}
+            >
+              <p>Responding to: {g.prompts.prompt}</p>
+              {g.profile_id === user?.id ? (
+                <X size={24} color={"red"} onClick={() => handleDelete(g.id)} />
+              ) : (
+                <div />
+              )}
+            </div>
             <CanvasContainer>
               <Canvas editable={false} grid={g.grid} />
             </CanvasContainer>
