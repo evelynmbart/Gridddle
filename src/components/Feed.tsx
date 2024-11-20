@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Prompt } from "@/types/database";
+import { Grid, FeedGrid, Prompt } from "@/types/database";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { Canvas } from "./Canvas";
@@ -8,7 +8,8 @@ import styled from "styled-components";
 import Image from "next/image";
 
 export function Feed() {
-  const [grids, setGrids] = useState<Grid[]>([]);
+  const [prompt, setPrompt] = useState<Prompt | null>(null);
+  const [grids, setGrids] = useState<FeedGrid[]>([]);
   const supabase = useSupabaseClient();
 
   useEffect(() => {
@@ -23,18 +24,28 @@ export function Feed() {
         return;
       }
       const prompt: Prompt | undefined = data?.[0];
-      if (!prompt) return;
+      setPrompt(prompt ?? null);
       const { data: grids, error: gridsError } = await supabase
         .from("grids")
-        .select("*")
-        .eq("prompt_id", prompt.id)
+        .select(
+          `
+          *,
+          profiles:profile_id (
+            *
+          ),
+          prompts:prompt_id (
+            *
+          )
+        `
+        )
         .order("created_at", { ascending: false });
+      console.log(grids);
       if (gridsError) {
         console.error(gridsError);
         alert("Error fetching grids");
         return;
       }
-      setGrids(grids as Grid[]);
+      setGrids(grids as FeedGrid[]);
     })();
   }, []);
 
@@ -43,23 +54,39 @@ export function Feed() {
       {grids.map((g) => {
         return (
           <Post key={g.id}>
+            <p>Responding to: {g.prompts.prompt}</p>
             <CanvasContainer>
               <Canvas editable={false} grid={g.grid} />
             </CanvasContainer>
             <PostInfo>
               <Top>
-                <h4>{g.email}</h4>
-                <Image
-                  src="/images/heart.png"
-                  width={30}
-                  height={30}
-                  alt="heart"
-                />
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <AvatarContainer>
+                    <Canvas editable={false} grid={g.profiles.avatar_grid} />
+                  </AvatarContainer>
+                  <h4>{g.profiles.username ?? "Anonymous"}</h4>
+                </div>
+                <div>
+                  {new Date(g.created_at).getTime() > Date.now() - 1000 * 60
+                    ? "just now"
+                    : new Date(g.created_at).getTime() >
+                      Date.now() - 1000 * 60 * 60
+                    ? `${Math.floor(
+                        (Date.now() - new Date(g.created_at).getTime()) /
+                          (1000 * 60)
+                      )}m ago`
+                    : new Date(g.created_at).getTime() >
+                      Date.now() - 1000 * 60 * 60 * 24
+                    ? `${Math.floor(
+                        (Date.now() - new Date(g.created_at).getTime()) /
+                          (1000 * 60 * 60)
+                      )}h ago`
+                    : `${Math.floor(
+                        (Date.now() - new Date(g.created_at).getTime()) /
+                          (1000 * 60 * 60 * 24)
+                      )}d ago`}
+                </div>
               </Top>
-              <Bottom>
-                <p>9 hours ago</p>
-                <p>Likes: 203</p>
-              </Bottom>
             </PostInfo>
           </Post>
         );
@@ -84,8 +111,8 @@ const Post = styled.div`
   align-items: center;
   flex-direction: column;
   border: 2px solid black;
-  height: 355px;
   background-color: black;
+  padding: 10px;
   color: white;
 `;
 
@@ -106,4 +133,10 @@ const Bottom = styled.div`
 const CanvasContainer = styled.div`
   width: 300px;
   height: 300px;
+`;
+
+const AvatarContainer = styled.div`
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
 `;

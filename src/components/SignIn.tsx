@@ -5,7 +5,10 @@ export function SignIn() {
 
   const signIn = async () => {
     const res = await supabase.auth.signInWithOAuth({
-      provider: "github"
+      provider: "github",
+      options: {
+        redirectTo: window.location.origin
+      }
     });
     console.log(res);
   };

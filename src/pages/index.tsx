@@ -1,18 +1,11 @@
 import { Feed } from "@/components/Feed";
 import { Navbar } from "@/components/NavbarNew";
 import { Prompt } from "@/components/Prompt";
-import { SignIn } from "@/components/SignIn";
-import { SignOut } from "@/components/SignOut";
-import { useUser } from "@supabase/auth-helpers-react";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
 import styled from "styled-components";
 
 export default function Home() {
-  const [isHovering, setIsHovering] = useState(false);
-  const user = useUser();
-
   return (
     <>
       <Head>
@@ -21,24 +14,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
       <Prompt />
       <div
         style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
       >
-        <Create>
-          <Link
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-            href="/canvas"
-            style={{
-              color: isHovering ? "black" : "white",
-              textDecoration: "none",
-            }}
-          >
-            Create a post of your own here!
-          </Link>
-        </Create>
+        <Link href="/canvas" style={{ textDecoration: "none" }}>
+          <Create>Create a post of your own here!</Create>
+        </Link>
       </div>
 
       <Feed />
@@ -54,8 +36,10 @@ const Create = styled.button`
   font-size: 20px;
   border: none;
   padding: 5px 10px;
+  color: white;
 
   &:hover {
     background-color: white;
+    color: black;
   }
 `;

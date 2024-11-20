@@ -16,15 +16,15 @@ export function Navbar() {
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: window.location.origin,
-      },
+        redirectTo: window.location.origin
+      }
     });
   };
 
   const tabs = [
     { label: "Feed", href: "/" },
     { label: "Canvas", href: "/canvas" },
-    ...(user ? [{ label: "Profile", href: "/profile" }] : []),
+    ...(user ? [{ label: "Profile", href: "/profile" }] : [])
   ];
 
   return (
@@ -47,12 +47,11 @@ export function Navbar() {
 
 const Container = styled.div`
   width: 100%;
-  height: 30px;
+  height: 42px;
   background-color: black;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 10px;
   color: white;
 `;
 
@@ -62,7 +61,7 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  font-size: 20px;
+  font-size: 30px;
   margin: 0 4px 2px 0;
   &:hover {
     cursor: pointer;
@@ -72,12 +71,12 @@ const Right = styled.div`
 const Tab = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
   color: white;
-  background: ${(props) => (props.selected ? "#406e8e" : "##23395b")};
+  background: ${(props) => (props.selected ? "#406e8e" : "#23395b")};
   height: 80%;
   padding: 2px 6px;
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px 10px 0 0;
   border-bottom: -1px solid ${(props) => (props.selected ? "none" : "black")};
-  font-size: 20px;
+  font-size: 30px;
 
   &:hover {
     cursor: pointer;

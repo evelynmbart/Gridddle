@@ -46,9 +46,9 @@ export default function CanvasPage() {
     }
     const data = serializeCanvas(canvasData.dataArray);
     const { error } = await supabase.from("grids").insert({
-      email: user.email,
+      profile_id: user.id,
       grid: data,
-      prompt_id: prompt?.id,
+      prompt_id: prompt?.id
     });
     if (error) {
       console.error(error);
@@ -64,7 +64,6 @@ export default function CanvasPage() {
 
   return (
     <>
-      <Navbar />
       {!user && <div>You must sign in to save your drawings:</div>}
       <Prompt />
       <Container>
