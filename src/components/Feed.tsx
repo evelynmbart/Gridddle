@@ -1,12 +1,11 @@
 "use client";
 
-import { Grid, FeedGrid, Prompt } from "@/types/database";
+import { FeedGrid } from "@/types/database";
+import { X } from "@phosphor-icons/react";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import { Canvas } from "./Canvas";
 import styled from "styled-components";
-import Image from "next/image";
-import { X } from "@phosphor-icons/react";
+import { Canvas } from "./Canvas";
 
 export function Feed() {
   const [grids, setGrids] = useState<FeedGrid[]>([]);
@@ -59,10 +58,10 @@ export function Feed() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                width: "100%"
+                width: "100%",
               }}
             >
-              <p>Responding to: {g.prompts.prompt}</p>
+              {g.prompts && <p>Responding to: {g.prompts.prompt}</p>}
               {g.profile_id === user?.id ? (
                 <X size={24} color={"red"} onClick={() => handleDelete(g.id)} />
               ) : (
