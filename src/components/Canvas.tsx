@@ -1,16 +1,16 @@
 "use client";
 
-import { forwardRef, MutableRefObject, useEffect, useRef } from "react";
-import styled from "styled-components";
-import { Tool, useCanvasStore } from "../stores/canvas";
+import { deserializeCanvas } from "@/utils/canvas";
 import {
   BRUSH_PATTERN_ELEMENT,
   BrushTool,
   Dotting,
   DottingRef,
-  useBrush
+  useBrush,
 } from "dotting";
-import { deserializeCanvas } from "@/utils/canvas";
+import { forwardRef, MutableRefObject, useEffect, useRef } from "react";
+import styled from "styled-components";
+import { Tool, useCanvasStore } from "../stores/canvas";
 
 const GRID_SIZE = 16;
 
@@ -18,7 +18,7 @@ const EMPTY_GRID = Array.from({ length: GRID_SIZE }, (_, i) =>
   Array.from({ length: GRID_SIZE }, (_, j) => ({
     rowIndex: i,
     columnIndex: j,
-    color: "white"
+    color: "white",
   }))
 );
 
@@ -27,18 +27,18 @@ const BRUSH_PATTERN = [
   [
     BRUSH_PATTERN_ELEMENT.EMPTY,
     BRUSH_PATTERN_ELEMENT.FILL,
-    BRUSH_PATTERN_ELEMENT.EMPTY
+    BRUSH_PATTERN_ELEMENT.EMPTY,
   ],
   [
     BRUSH_PATTERN_ELEMENT.FILL,
     BRUSH_PATTERN_ELEMENT.FILL,
-    BRUSH_PATTERN_ELEMENT.FILL
+    BRUSH_PATTERN_ELEMENT.FILL,
   ],
   [
     BRUSH_PATTERN_ELEMENT.EMPTY,
     BRUSH_PATTERN_ELEMENT.FILL,
-    BRUSH_PATTERN_ELEMENT.EMPTY
-  ]
+    BRUSH_PATTERN_ELEMENT.EMPTY,
+  ],
 ];
 
 interface Props {
@@ -86,13 +86,16 @@ export const Canvas = forwardRef<DottingRef, Props>(
           isGridVisible={editable}
           isPanZoomable={false}
           isGridFixed={true}
-          gridSquareLength={25}
+          gridSquareLength={40}
           initAutoScale={true}
           style={{
-            border: "none"
+            border: "none",
+            width: "100%",
+            height: "100%",
+            display: "block",
           }}
           initLayers={[
-            { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID }
+            { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID },
           ]}
           isInteractionApplicable={editable}
           isDrawingEnabled={editable}
@@ -103,14 +106,19 @@ export const Canvas = forwardRef<DottingRef, Props>(
 );
 
 const Container = styled.div<{ editable: boolean }>`
-  width: min(100%, 400px);
+  width: 100%;
   aspect-ratio: 1 / 1;
+  overflow: hidden;
+  // background: rgb(199, 92, 92);
+  transition: all 0.3s ease;
 
   ${({ editable }: { editable: boolean }) =>
     editable
       ? `
       &:hover {
         cursor: crosshair !important;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
       }
     `
       : `

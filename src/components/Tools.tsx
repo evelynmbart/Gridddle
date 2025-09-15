@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { useCanvasStore, Tool } from "../stores/canvas";
 import Image from "next/image";
+import styled from "styled-components";
+import { Tool, useCanvasStore } from "../stores/canvas";
 
 interface Props {
   onSave: () => void;
@@ -54,7 +54,13 @@ export function Tools({ onSave, onClear }: Props) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
 const Palette = styled.div`
@@ -62,23 +68,31 @@ const Palette = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 `;
 
 const Color = styled.button<{ color: string; selected: boolean }>`
   background-color: ${({ color }) => color};
-  border: 2px solid black;
-  height: 60px;
-  width: 60px;
+  border: 3px solid
+    ${({ selected }) => (selected ? "#333" : "rgba(0, 0, 0, 0.2)")};
+  height: 50px;
+  width: 50px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    border: 2px solid black;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   ${({ selected }) =>
     selected &&
     `
-      border: 4px solid black;
+      border: 3px solid #333;
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     `}
 `;
 
@@ -87,14 +101,28 @@ const ToolContainer = styled.div<{ selected: boolean }>`
   cursor: pointer;
   display: flex;
   justify-content: center;
-  height: 60px;
-  width: 60px;
+  align-items: center;
+  height: 50px;
+  width: 50px;
   box-sizing: border-box;
+  border: 3px solid
+    ${({ selected }) => (selected ? "#333" : "rgba(0, 0, 0, 0.2)")};
+  border-radius: 12px;
+  background: #f8f9fa;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
 
   ${({ selected }) =>
     selected &&
     `
-      border: 4px solid black;
+      border: 3px solid #333;
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     `}
 `;
 
@@ -102,18 +130,28 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 16px;
+  flex-wrap: wrap;
 `;
 
 const Button = styled.button`
-  background-color: black;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: 2px solid black;
-  padding: 5px 10px;
-  font-family: "Tiny5";
-  font-size: 32px;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  min-width: 100px;
 
   &:hover {
-    border: 2px solid goldenrod;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;

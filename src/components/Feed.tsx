@@ -59,13 +59,21 @@ export function Feed() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 width: "100%",
+                marginBottom: "12px",
               }}
             >
-              {g.prompts && <p>Responding to: {g.prompts.prompt}</p>}
-              {g.profile_id === user?.id ? (
-                <X size={24} color={"red"} onClick={() => handleDelete(g.id)} />
-              ) : (
-                <div />
+              {g.prompts && (
+                <PromptBadge>
+                  <span style={{ fontSize: "1.5rem", opacity: 0.7 }}>
+                    Responding to:
+                  </span>
+                  <span style={{ fontWeight: "600" }}>{g.prompts.prompt}</span>
+                </PromptBadge>
+              )}
+              {g.profile_id === user?.id && (
+                <DeleteButton onClick={() => handleDelete(g.id)}>
+                  <X size={30} color={"#dc3545"} />
+                </DeleteButton>
               )}
             </div>
             <CanvasContainer>
@@ -77,9 +85,19 @@ export function Feed() {
                   <AvatarContainer>
                     <Canvas editable={false} grid={g.profiles.avatar_grid} />
                   </AvatarContainer>
-                  <h4>{g.profiles.username ?? "Anonymous"}</h4>
+                  <div>
+                    <h4
+                      style={{
+                        margin: 0,
+                        fontSize: "1.5rem",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {g.profiles.username ?? "Anonymous"}
+                    </h4>
+                  </div>
                 </div>
-                <div>
+                <TimeStamp>
                   {new Date(g.created_at).getTime() > Date.now() - 1000 * 60
                     ? "just now"
                     : new Date(g.created_at).getTime() >
@@ -98,7 +116,7 @@ export function Feed() {
                         (Date.now() - new Date(g.created_at).getTime()) /
                           (1000 * 60 * 60 * 24)
                       )}d ago`}
-                </div>
+                </TimeStamp>
               </Top>
             </PostInfo>
           </Post>
@@ -109,34 +127,58 @@ export function Feed() {
 }
 
 const Catalog = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  padding: 20px;
-  margin: 20px 200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+    gap: 12px;
+  }
 `;
 
 const Post = styled.div`
   display: flex;
-  justify-content: start;
-  align-items: center;
   flex-direction: column;
-  border: 2px solid black;
   background-color: black;
-  padding: 10px;
   color: white;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 480px) {
+    padding: 16px;
+  }
 `;
 
 const PostInfo = styled.div`
-  width: 94%;
+  width: 100%;
+  margin-top: 16px;
 `;
 
 const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 8px;
 `;
 const Bottom = styled.div`
   display: flex;
@@ -144,12 +186,54 @@ const Bottom = styled.div`
 `;
 
 const CanvasContainer = styled.div`
-  width: 300px;
+  width: 100%;
   height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f9fa;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const AvatarContainer = styled.div`
-  width: 32px;
-  height: 32px;
-  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+`;
+
+const PromptBadge = styled.div`
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 200px;
+`;
+
+const DeleteButton = styled.button`
+  background-color: black;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(220, 53, 69, 0.2);
+    transform: scale(1.05);
+  }
+`;
+
+const TimeStamp = styled.div`
+  font-size: 1.5rem;
+  color: #6c757d;
+  font-weight: 500;
 `;

@@ -1,5 +1,4 @@
 import { Feed } from "@/components/Feed";
-import { Navbar } from "@/components/NavbarNew";
 import { Prompt } from "@/components/Prompt";
 import Head from "next/head";
 import Link from "next/link";
@@ -15,31 +14,50 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Prompt />
-      <div
-        style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
-      >
+      <CreateContainer>
         <Link href="/canvas" style={{ textDecoration: "none" }}>
           <Create>Create a post of your own here!</Create>
         </Link>
-      </div>
+      </CreateContainer>
 
       <Feed />
     </>
   );
 }
 
+const CreateContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+`;
+
 const Create = styled.button`
   display: flex;
   justify-content: center;
-  background-color: black;
-  font-family: "Tiny5";
-  font-size: 20px;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-size: 18px;
+  font-weight: 600;
   border: none;
-  padding: 5px 10px;
+  padding: 16px 32px;
   color: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  min-width: 280px;
 
   &:hover {
-    background-color: white;
-    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+    padding: 14px 28px;
+    min-width: 240px;
   }
 `;

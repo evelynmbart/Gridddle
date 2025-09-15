@@ -16,15 +16,15 @@ export function Navbar() {
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: window.location.origin
-      }
+        redirectTo: window.location.origin,
+      },
     });
   };
 
   const tabs = [
     { label: "Feed", href: "/" },
     { label: "Canvas", href: "/canvas" },
-    ...(user ? [{ label: "Profile", href: "/profile" }] : [])
+    ...(user ? [{ label: "Profile", href: "/profile" }] : []),
   ];
 
   return (
@@ -47,38 +47,69 @@ export function Navbar() {
 
 const Container = styled.div`
   width: 100%;
-  height: 42px;
-  background-color: black;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   color: white;
+  padding: 0 24px;
+
+  @media (max-width: 480px) {
+    padding: 0 16px;
+    height: 50px;
+  }
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 `;
 
 const Left = styled.div`
   display: flex;
-  gap: 2px;
+  gap: 8px;
+  align-items: center;
 `;
 
-const Right = styled.div`
-  font-size: 30px;
-  margin: 0 4px 2px 0;
+const Right = styled.button`
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
   &:hover {
     cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
 `;
 
 const Tab = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
   color: white;
-  background: ${(props) => (props.selected ? "#406e8e" : "#23395b")};
-  height: 80%;
-  padding: 2px 6px;
-  border-radius: 10px 10px 0 0;
-  border-bottom: -1px solid ${(props) => (props.selected ? "none" : "black")};
-  font-size: 30px;
+  background: ${(props) =>
+    props.selected ? "rgba(102, 126, 234, 0.2)" : "transparent"};
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid
+    ${(props) => (props.selected ? "rgba(102, 126, 234, 0.3)" : "transparent")};
 
   &:hover {
     cursor: pointer;
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    padding: 6px 12px;
   }
 `;

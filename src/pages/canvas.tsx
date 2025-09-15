@@ -1,7 +1,6 @@
 "use client";
 
 import { Canvas } from "@/components/Canvas";
-import { Navbar } from "@/components/NavbarNew";
 import { Prompt } from "@/components/Prompt";
 import { Tools } from "@/components/Tools";
 import { useCanvasStore } from "@/stores/canvas";
@@ -48,7 +47,7 @@ export default function CanvasPage() {
     const { error } = await supabase.from("grids").insert({
       profile_id: user.id,
       grid: data,
-      prompt_id: prompt?.id
+      prompt_id: prompt?.id,
     });
     if (error) {
       console.error(error);
@@ -84,5 +83,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
+  gap: 24px;
+  max-width: 1200px;
+  padding: 0 24px;
+
+  @media (min-width: 768px) {
+    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+  }
 `;

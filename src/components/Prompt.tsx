@@ -37,10 +37,46 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: 36px;
+  font-size: 24px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  margin: 20px auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 600px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin: 16px;
+    padding: 20px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
+    margin: 12px;
+    padding: 16px;
+    font-size: 18px;
+  }
 `;
 
 const DailyPrompt = styled.h1`
   color: white;
   text-transform: uppercase;
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 12px 0 0 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+  }
 `;
