@@ -48,7 +48,7 @@ export function Navbar() {
 const Container = styled.div`
   width: 100%;
   height: 60px;
-  background: rgba(0, 0, 0, 0.9);
+
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@ const Container = styled.div`
     padding: 0 16px;
     height: 50px;
   }
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
   position: sticky;
   top: 0;
   z-index: 100;
@@ -91,21 +91,20 @@ const Right = styled.button`
 
 const Tab = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
-  color: white;
-  background: ${(props) =>
-    props.selected ? "rgba(102, 126, 234, 0.2)" : "transparent"};
+  color: ${(props) => (props.selected ? "white" : "black")};
+  background: ${(props) => (props.selected ? "black" : "none")};
   padding: 8px 16px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1.5rem;
   font-weight: 600;
   transition: all 0.2s ease;
-  border: 1px solid
-    ${(props) => (props.selected ? "rgba(102, 126, 234, 0.3)" : "transparent")};
+  // border: 1px solid
+  //   ${(props) =>
+    props.selected ? "rgba(102, 126, 234, 0.3)" : "transparent"};
 
   &:hover {
     cursor: pointer;
-    background: rgba(102, 126, 234, 0.1);
-    transform: translateY(-1px);
+    color: white;
   }
 
   @media (max-width: 480px) {
