@@ -44,10 +44,11 @@ const BRUSH_PATTERN = [
 interface Props {
   editable: boolean;
   grid?: string[][];
+  size?: number;
 }
 
 export const Canvas = forwardRef<DottingRef, Props>(
-  ({ editable, grid }, inputRef) => {
+  ({ editable, grid, size }, inputRef) => {
     const localRef = useRef<DottingRef>(null);
     const ref = inputRef ?? localRef;
 
@@ -77,7 +78,7 @@ export const Canvas = forwardRef<DottingRef, Props>(
     }, [tool, brush]);
 
     return (
-      <Container editable={editable}>
+      <Container editable={editable} size={size}>
         <Dotting
           ref={ref}
           height="100%"
@@ -104,9 +105,9 @@ export const Canvas = forwardRef<DottingRef, Props>(
   }
 );
 
-const Container = styled.div<{ editable: boolean }>`
-  width: 500px;
-  height: 500px;
+const Container = styled.div<{ editable: boolean; size?: number }>`
+  width: ${({ size }) => (size ? `${size}px` : "500px")};
+  height: ${({ size }) => (size ? `${size}px` : "500px")};
   border-radius: 12px;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -115,15 +116,19 @@ const Container = styled.div<{ editable: boolean }>`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 600px) {
-    width: 400px;
-    height: 400px;
-  }
+  ${({ size }) =>
+    !size &&
+    `
+    @media (max-width: 600px) {
+      width: 400px;
+      height: 400px;
+    }
 
-  @media (max-width: 480px) {
-    width: 350px;
-    height: 350px;
-  }
+    @media (max-width: 480px) {
+      width: 350px;
+      height: 350px;
+    }
+  `}
 
   ${({ editable }: { editable: boolean }) =>
     editable

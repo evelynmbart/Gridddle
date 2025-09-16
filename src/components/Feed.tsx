@@ -90,7 +90,11 @@ export function Feed() {
               <Bottom>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <AvatarContainer>
-                    <Canvas editable={false} grid={g.profiles.avatar_grid} />
+                    <Canvas
+                      editable={false}
+                      grid={g.profiles.avatar_grid}
+                      size={40}
+                    />
                   </AvatarContainer>
                   <div>
                     <h4
