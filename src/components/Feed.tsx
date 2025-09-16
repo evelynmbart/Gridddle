@@ -188,16 +188,14 @@ const Top = styled.div`
   justify-content: space-between;
   margin-bottom: 8px;
 `;
+const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const CanvasContainer = styled.div`
   border-radius: 12px;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   background-color: white;
 `;
 
@@ -214,7 +212,7 @@ const AvatarContainer = styled.div`
 const PromptBadge = styled.div`
   padding: 8px 12px;
   border-radius: 20px;
-  font-size: 2rem;
+  font-size: 1.55rem;
   display: flex;
   flex-direction: column;
   gap: 2px;

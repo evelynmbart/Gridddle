@@ -61,6 +61,18 @@ const Container = styled.div`
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 300px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+    gap: 20px;
+  }
 `;
 
 const Palette = styled.div`

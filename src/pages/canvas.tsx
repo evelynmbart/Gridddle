@@ -84,15 +84,21 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px auto;
   gap: 24px;
   max-width: 1200px;
   padding: 0 24px;
+  width: 100%;
 
   @media (min-width: 768px) {
+    flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    align-items: center;
     gap: 48px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 16px;
+    gap: 16px;
   }
 `;
