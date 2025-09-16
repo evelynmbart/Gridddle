@@ -48,7 +48,7 @@ export function Navbar() {
 const Container = styled.div`
   width: 100%;
   height: 60px;
-  background: rgba(0, 0, 0, 0.9);
+
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -72,7 +72,7 @@ const Left = styled.div`
 `;
 
 const Right = styled.button`
-  font-size: 16px;
+  font-size: 1.5rem;
   font-weight: 600;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -103,7 +103,10 @@ const Tab = styled(Link)<{ selected: boolean }>`
 
   &:hover {
     cursor: pointer;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
 
   @media (max-width: 480px) {
