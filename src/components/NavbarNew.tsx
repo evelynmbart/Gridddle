@@ -84,26 +84,27 @@ const Right = styled.button`
   &:hover {
     cursor: pointer;
     transform: translateY(-1px);
+    background: transparent;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
 `;
 
 const Tab = styled(Link)<{ selected: boolean }>`
   text-decoration: none;
-  color: ${(props) => (props.selected ? "white" : "black")};
-  background: ${(props) => (props.selected ? "black" : "none")};
+  color: white;
+  background: ${(props) =>
+    props.selected
+      ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+      : "black"};
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 1.5rem;
   font-weight: 600;
   transition: all 0.2s ease;
-  // border: 1px solid
-  //   ${(props) =>
-    props.selected ? "rgba(102, 126, 234, 0.3)" : "transparent"};
 
   &:hover {
     cursor: pointer;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: transparent;
     color: white;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);

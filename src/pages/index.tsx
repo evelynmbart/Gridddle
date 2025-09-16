@@ -47,8 +47,9 @@ const Create = styled.button`
   min-width: 280px;
 
   &:hover {
+    cursor: pointer;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
   &:active {
