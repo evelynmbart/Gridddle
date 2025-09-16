@@ -86,17 +86,12 @@ export const Canvas = forwardRef<DottingRef, Props>(
           isGridVisible={editable}
           isPanZoomable={false}
           isGridFixed={true}
-          gridSquareLength={40}
+          gridSquareLength={25}
           initAutoScale={true}
           style={{
             border: "none",
             width: "100%",
             height: "100%",
-            overflow: "hidden",
-            objectFit: "contain",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
           initLayers={[
             { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID },
@@ -110,18 +105,31 @@ export const Canvas = forwardRef<DottingRef, Props>(
 );
 
 const Container = styled.div<{ editable: boolean }>`
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
   transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    width: 400px;
+    height: 400px;
+  }
+
+  @media (max-width: 480px) {
+    width: 350px;
+    height: 350px;
+  }
 
   ${({ editable }: { editable: boolean }) =>
     editable
       ? `
       &:hover {
         cursor: crosshair !important;
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
         transform: translateY(-2px);
       }
     `

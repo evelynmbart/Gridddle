@@ -18,7 +18,7 @@ export function Prompt() {
         alert("Error fetching prompt");
         return;
       }
-      setPrompt(data?.[0]?.prompt ?? "whatever");
+      setPrompt(data?.[0]?.prompt ?? "Whatever");
     })();
   }, []);
 
@@ -47,18 +47,6 @@ const Container = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.1);
   max-width: 600px;
   text-align: center;
-
-  @media (max-width: 768px) {
-    margin: 16px;
-    padding: 20px;
-    font-size: 20px;
-  }
-
-  @media (max-width: 480px) {
-    margin: 12px;
-    padding: 16px;
-    font-size: 18px;
-  }
 `;
 
 const DailyPrompt = styled.h1`

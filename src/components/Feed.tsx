@@ -74,7 +74,7 @@ export function Feed() {
                   <span style={{ fontSize: "1.5rem", opacity: 0.7 }}>
                     Responding to:
                   </span>
-                  <span style={{ fontWeight: "600" }}>Whatever you want!</span>
+                  <span style={{ fontWeight: "600" }}>Whatever</span>
                 </PromptBadge>
               )}
               {g.profile_id === user?.id && (
@@ -87,7 +87,7 @@ export function Feed() {
               <Canvas editable={false} grid={g.grid} />
             </CanvasContainer>
             <PostInfo>
-              <Top>
+              <Bottom>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <AvatarContainer>
                     <Canvas editable={false} grid={g.profiles.avatar_grid} />
@@ -124,7 +124,7 @@ export function Feed() {
                           (1000 * 60 * 60 * 24)
                       )}d ago`}
                 </TimeStamp>
-              </Top>
+              </Bottom>
             </PostInfo>
           </Post>
         );
@@ -135,21 +135,23 @@ export function Feed() {
 
 const Catalog = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, 400px);
   gap: 24px;
   padding: 24px;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
   min-height: calc(100vh - 200px);
+  justify-content: center;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, 400px);
     padding: 16px;
     gap: 16px;
   }
 
   @media (max-width: 480px) {
+    grid-template-columns: 1fr;
     padding: 12px;
     gap: 12px;
   }
@@ -166,6 +168,8 @@ const Post = styled.div`
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  aspect-ratio: 1;
+  width: 400px;
 
   &:hover {
     transform: translateY(-4px);
@@ -173,6 +177,7 @@ const Post = styled.div`
   }
 
   @media (max-width: 480px) {
+    width: 100%;
     padding: 16px;
   }
 `;
@@ -182,20 +187,22 @@ const PostInfo = styled.div`
   margin-top: 16px;
 `;
 
-const Top = styled.div`
+const Bottom = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
 `;
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const CanvasContainer = styled.div`
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
-
+  position: relative;
+  overflow: hidden;
   background-color: white;
 `;
 

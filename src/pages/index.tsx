@@ -28,7 +28,7 @@ export default function Home() {
 const CreateContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 24px 0;
+  margin: 20px auto;
 `;
 
 const Create = styled.button`

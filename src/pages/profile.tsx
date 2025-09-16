@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { Check, Pencil } from "@phosphor-icons/react";
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { Profile } from "@/types/database";
 import { Canvas } from "@/components/Canvas";
-import { DottingRef, useData, useDotting } from "dotting";
-import { PaintBrush } from "@phosphor-icons/react/dist/ssr";
-import { serializeCanvas } from "@/utils/canvas";
 import { useCanvasStore } from "@/stores/canvas";
+import { Profile } from "@/types/database";
+import { serializeCanvas } from "@/utils/canvas";
+import { Check, Pencil } from "@phosphor-icons/react";
+import { PaintBrush } from "@phosphor-icons/react/dist/ssr";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { DottingRef, useData } from "dotting";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 
 export default function ProfilePage() {
   const user = useUser();
@@ -122,7 +122,7 @@ export default function ProfilePage() {
                         onClick={() => setColor(color)}
                         style={{
                           border: `3px solid ${color}`,
-                          borderRadius: 5
+                          borderRadius: 5,
                         }}
                       >
                         <PaintBrush size={32} color={color} />
@@ -155,6 +155,10 @@ const EditButton = styled.button`
 
 const Container = styled.div`
   display: flex;
+  border-radius: 12px;
+
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   color: white;
 `;
@@ -163,6 +167,9 @@ const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: black;
+  padding: 60px;
+  border-radius: 12px;
 
   gap: 10px;
 
@@ -181,8 +188,6 @@ const UserInfo = styled.div`
   textarea {
     width: 300px;
     height: 50px;
-    max-width: 500px;
-    max-height: 100px;
   }
 
   p {
@@ -227,7 +232,11 @@ const AvatarEditor = styled.div`
 `;
 
 const AvatarContainer = styled.div`
-  position: absolute;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background-color: black;
 `;

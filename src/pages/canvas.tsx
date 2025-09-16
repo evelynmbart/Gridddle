@@ -87,18 +87,5 @@ const Container = styled.div`
   margin: 20px auto;
   gap: 24px;
   max-width: 1200px;
-  padding: 0 24px;
   width: 100%;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 48px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0 16px;
-    gap: 16px;
-  }
 `;
