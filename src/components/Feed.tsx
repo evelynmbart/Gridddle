@@ -62,14 +62,19 @@ export function Feed() {
                 marginBottom: "12px",
               }}
             >
-              {g.prompts && (
+              {g.prompts !== null ? (
                 <PromptBadge>
                   <span style={{ fontSize: "1.5rem", opacity: 0.7 }}>
                     Responding to:
                   </span>
-                  <span style={{ fontWeight: "600" }}>
-                    {g.prompts.prompt ?? "Whatever"}
+                  <span style={{ fontWeight: "600" }}>{g.prompts.prompt}</span>
+                </PromptBadge>
+              ) : (
+                <PromptBadge>
+                  <span style={{ fontSize: "1.5rem", opacity: 0.7 }}>
+                    Responding to:
                   </span>
+                  <span style={{ fontWeight: "600" }}>Whatever you want!</span>
                 </PromptBadge>
               )}
               {g.profile_id === user?.id && (
@@ -216,7 +221,7 @@ const PromptBadge = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  max-width: 200px;
+  max-width: 400px;
 `;
 
 const DeleteButton = styled.button`
