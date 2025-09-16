@@ -67,7 +67,9 @@ export function Feed() {
                   <span style={{ fontSize: "1.5rem", opacity: 0.7 }}>
                     Responding to:
                   </span>
-                  <span style={{ fontWeight: "600" }}>{g.prompts.prompt}</span>
+                  <span style={{ fontWeight: "600" }}>
+                    {g.prompts.prompt ?? "Whatever"}
+                  </span>
                 </PromptBadge>
               )}
               {g.profile_id === user?.id && (
@@ -187,7 +189,7 @@ const Bottom = styled.div`
 
 const CanvasContainer = styled.div`
   width: 100%;
-  height: 300px;
+  height: 400px;
   border-radius: 12px;
   overflow: hidden;
   background: #f8f9fa;
