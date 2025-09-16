@@ -48,22 +48,21 @@ export function Navbar() {
 const Container = styled.div`
   width: 100%;
   height: 60px;
-
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: white;
   padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   @media (max-width: 480px) {
     padding: 0 16px;
     height: 50px;
   }
-
-  position: sticky;
-  top: 0;
-  z-index: 100;
 `;
 
 const Left = styled.div`

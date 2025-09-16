@@ -141,6 +141,7 @@ const Catalog = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  min-height: calc(100vh - 200px);
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -187,21 +188,17 @@ const Top = styled.div`
   justify-content: space-between;
   margin-bottom: 8px;
 `;
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const CanvasContainer = styled.div`
-  width: 100%;
-  height: 400px;
   border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #f8f9fa;
-  border: 2px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
 `;
 
 const AvatarContainer = styled.div`

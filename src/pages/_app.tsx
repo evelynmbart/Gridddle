@@ -1,17 +1,17 @@
-import { AppProps } from "next/app";
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
-import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
-import { useState } from "react";
-import "@/index.css";
-import { Tiny5 } from "next/font/google";
-import styled from "styled-components";
 import { Navbar } from "@/components/NavbarNew";
+import "@/index.css";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
+import { Session, SessionContextProvider } from "@supabase/auth-helpers-react";
+import { AppProps } from "next/app";
+import { Tiny5 } from "next/font/google";
+import { useState } from "react";
+import styled from "styled-components";
 
 const font = Tiny5({ subsets: ["latin"], weight: "400" });
 
 function MyApp({
   Component,
-  pageProps
+  pageProps,
 }: AppProps<{
   initialSession: Session;
 }>) {
@@ -37,19 +37,14 @@ function MyApp({
 export default MyApp;
 
 const Container = styled.div`
-  background-color: #406e8e;
-  height: 100vh;
-  width: 100vw;
-  max-width: 500px;
-  margin: 0 auto;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Content = styled.div`
-  height: calc(100vh - 50px);
-  overflow-y: auto;
+  flex: 1;
+  width: 100%;
   padding-top: 20px;
 `;

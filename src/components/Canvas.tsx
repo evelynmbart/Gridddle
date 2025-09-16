@@ -92,7 +92,11 @@ export const Canvas = forwardRef<DottingRef, Props>(
             border: "none",
             width: "100%",
             height: "100%",
-            display: "block",
+            overflow: "hidden",
+            objectFit: "contain",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
           initLayers={[
             { id: "1", data: grid ? deserializeCanvas(grid) : EMPTY_GRID },
@@ -107,9 +111,9 @@ export const Canvas = forwardRef<DottingRef, Props>(
 
 const Container = styled.div<{ editable: boolean }>`
   width: 100%;
+  height: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  // background: rgb(199, 92, 92);
   transition: all 0.3s ease;
 
   ${({ editable }: { editable: boolean }) =>
