@@ -9,16 +9,29 @@ export function Prompt() {
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await supabase
-        .from("prompts")
-        .select("*")
-        .eq("day", new Date().toLocaleDateString("en-CA"));
+      const today = new Date().toLocaleDateString("en-CA");
+      console.log("Fetching daily prompt for date:", today);
+
+      const { data, error } = await supabase.from("prompts").select("*");
+
+      console.log("Query result:", { data, error });
+
       if (error) {
-        console.error(error);
+        console.error("Supabase error:", error);
         alert("Error fetching prompt");
         return;
       }
-      setPrompt(data?.[0]?.prompt ?? "Whatever");
+
+      console.log("Found prompts:", data);
+
+      if (data && data.length > 0) {
+        // Use the date as a seed for consistent daily selection
+        const dateSeed = new Date(today).getTime();
+        const randomIndex = Math.floor(dateSeed % data.length);
+        setPrompt(data[randomIndex].prompt);
+      } else {
+        setPrompt("Whatever");
+      }
     })();
   }, []);
 
