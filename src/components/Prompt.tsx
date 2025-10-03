@@ -4,13 +4,25 @@ import styled from "styled-components";
 
 export function Prompt() {
   const [prompt, setPrompt] = useState<string | null>(null);
+  const [currentDate, setCurrentDate] = useState<string>(
+    new Date().toLocaleDateString("en-CA")
+  );
 
   const supabase = useSupabaseClient();
 
+  // Update the date every minute to catch day changes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const today = new Date().toLocaleDateString("en-CA");
+      setCurrentDate(today);
+    }, 60000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     (async () => {
-      const today = new Date().toLocaleDateString("en-CA");
-      console.log("Fetching daily prompt for date:", today);
+      console.log("Fetching daily prompt for date:", currentDate);
 
       const { data, error } = await supabase.from("prompts").select("*");
 
@@ -26,14 +38,14 @@ export function Prompt() {
 
       if (data && data.length > 0) {
         // Use the date as a seed for consistent daily selection
-        const dateSeed = new Date(today).getTime();
+        const dateSeed = new Date(currentDate).getTime();
         const randomIndex = Math.floor(dateSeed % data.length);
         setPrompt(data[randomIndex].prompt);
       } else {
         setPrompt("Whatever");
       }
     })();
-  }, []);
+  }, [supabase, currentDate]);
 
   if (!prompt) return null;
 
